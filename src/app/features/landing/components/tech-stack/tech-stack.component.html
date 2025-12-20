@@ -1,0 +1,14 @@
+<div class="inline-flex items-center gap-4">
+  <div 
+    *ngFor="let tech of technologies"
+    class="flex items-center gap-3 px-5 py-2.5 bg-gray-50/50 rounded-lg">
+    
+    <img 
+      [src]="tech.icon" 
+      [alt]="tech.name + ' logo'"
+      class="w-6 h-6 object-contain grayscale opacity-70"
+    />
+    
+    <span class="text-sm font-normal text-gray-600">{{ tech.name }}</span>
+  </div>
+</div>

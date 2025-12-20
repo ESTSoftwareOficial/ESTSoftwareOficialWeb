@@ -1,0 +1,101 @@
+<section class="relative w-full overflow-hidden bg-black/[0.96] px-6 py-20 antialiased">
+  <div 
+    #gridBackground
+    class="pointer-events-none absolute inset-0 select-none [background-image:linear-gradient(to_right,#171717_1px,transparent_1px),linear-gradient(to_bottom,#171717_1px,transparent_1px)] [background-size:40px_40px]">
+  </div>
+
+  <svg
+    [class.animate-spotlight]="isVisible"
+    class="pointer-events-none absolute z-[1] -top-40 left-0 md:-top-20 md:left-60 h-[169%] w-[138%] opacity-0 lg:w-[84%]"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 3787 2842"
+    fill="none">
+    <g filter="url(#filter)">
+      <ellipse
+        cx="1924.71"
+        cy="273.501"
+        rx="1924.71"
+        ry="273.501"
+        transform="matrix(-0.822377 -0.568943 -0.568943 0.822377 3631.88 2291.09)"
+        fill="white"
+        fill-opacity="0.21">
+      </ellipse>
+    </g>
+    <defs>
+      <filter
+        id="filter"
+        x="0.860352"
+        y="0.838989"
+        width="3785.16"
+        height="2840.26"
+        filterUnits="userSpaceOnUse"
+        color-interpolation-filters="sRGB">
+        <feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
+        <feBlend
+          mode="normal"
+          in="SourceGraphic"
+          in2="BackgroundImageFix"
+          result="shape">
+        </feBlend>
+        <feGaussianBlur
+          stdDeviation="151"
+          result="effect1_foregroundBlur_1065_8">
+        </feGaussianBlur>
+      </filter>
+    </defs>
+  </svg>
+
+  <div class="relative z-10 mx-auto max-w-7xl">
+    <div class="mb-16 text-center">
+      <h2 class="mb-4 bg-gradient-to-b from-neutral-50 to-neutral-400 bg-clip-text text-4xl font-bold text-transparent md:text-5xl">
+        Aprende los lenguajes más demandados
+      </h2>
+      <p class="mx-auto max-w-2xl text-lg text-neutral-300">
+        Conviértete en un desarrollador completo dominando las tecnologías que las empresas buscan
+      </p>
+    </div>
+
+    <ul class="grid grid-cols-1 grid-rows-none gap-4 md:grid-cols-12 md:grid-rows-3 lg:gap-4 xl:max-h-[34rem] xl:grid-rows-2">
+      <li *ngFor="let language of languages" [ngClass]="'min-h-[14rem] list-none ' + language.area">
+        <div class="relative h-full rounded-2xl border border-gray-800 p-2 md:rounded-3xl md:p-3">
+          
+          <div 
+            #glowContainer
+            class="pointer-events-none absolute inset-0 rounded-[inherit] opacity-100 transition-opacity"
+            [ngStyle]="{
+              '--blur': '0px',
+              '--spread': 80,
+              '--start': '0',
+              '--active': '0',
+              '--glowingeffect-border-width': '3px',
+              '--repeating-conic-gradient-times': '5',
+              '--gradient': 'radial-gradient(circle, #dd7bbb 10%, #dd7bbb00 20%), radial-gradient(circle at 40% 40%, #d79f1e 5%, #d79f1e00 15%), radial-gradient(circle at 60% 60%, #5a922c 10%, #5a922c00 20%), radial-gradient(circle at 40% 60%, #4c7894 10%, #4c789400 20%), repeating-conic-gradient(from 236.84deg at 50% 50%, #dd7bbb 0%, #d79f1e calc(25% / var(--repeating-conic-gradient-times)), #5a922c calc(50% / var(--repeating-conic-gradient-times)), #4c7894 calc(75% / var(--repeating-conic-gradient-times)), #dd7bbb calc(100% / var(--repeating-conic-gradient-times)))'
+            }">
+            <div class="glow rounded-[inherit] after:content-[''] after:rounded-[inherit] after:absolute after:inset-[calc(-1*var(--glowingeffect-border-width))] after:[border:var(--glowingeffect-border-width)_solid_transparent] after:[background:var(--gradient)] after:[background-attachment:fixed] after:opacity-[var(--active)] after:transition-opacity after:duration-300 after:[mask-clip:padding-box,border-box] after:[mask-composite:intersect] after:[mask-image:linear-gradient(#0000,#0000),conic-gradient(from_calc((var(--start)-var(--spread))*1deg),#00000000_0deg,#fff,#00000000_calc(var(--spread)*2deg))]">
+            </div>
+          </div>
+          
+          <div class="relative flex h-full flex-col justify-between gap-6 overflow-hidden rounded-xl border border-gray-900 bg-black p-6 md:p-6">
+            <div class="relative flex flex-1 flex-col justify-between gap-3">
+              <div class="w-fit rounded-lg border border-gray-700 bg-gray-900/50 p-3">
+                <img 
+                  [src]="language.iconUrl" 
+                  [alt]="language.name + ' logo'"
+                  class="h-8 w-8 object-contain"
+                />
+              </div>
+              <div class="space-y-3">
+                <h3 class="text-2xl font-semibold text-white md:text-3xl">
+                  {{ language.name }}
+                </h3>
+                <p class="text-sm leading-relaxed text-gray-400 md:text-base">
+                  {{ language.description }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>

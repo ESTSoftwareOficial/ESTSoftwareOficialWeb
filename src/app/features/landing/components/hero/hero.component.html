@@ -1,0 +1,36 @@
+<section class="min-h-screen flex items-center justify-center bg-white px-6 py-20">
+  <div class="max-w-5xl mx-auto text-center">
+    
+    <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6 leading-tight">
+      Aprende desarrollo de software a velocidad increíble
+    </h1>
+    
+    <p class="text-base md:text-lg text-gray-600 mb-10 max-w-3xl mx-auto leading-relaxed">
+      Accede a una colección en constante crecimiento de cursos premium, meticulosamente diseñados para desarrolladores. Ahorra tiempo y enfócate en lo que importa—construir tu carrera como desarrollador de clase mundial.
+    </p>
+
+    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
+      <button 
+        (click)="onExploreCourses()"
+        class="px-8 py-3 bg-black text-white text-sm font-medium rounded-lg hover:bg-gray-800 transition-colors duration-200">
+        Explorar Cursos
+      </button>
+      <button 
+        (click)="onGetStarted($event)"
+        class="px-8 py-3 bg-white text-black text-sm font-medium rounded-lg border border-gray-300 hover:border-gray-400 hover:bg-gray-50 transition-all duration-200">
+        Comenzar Gratis
+      </button>
+    </div>
+
+    <div class="flex flex-col items-center gap-4">
+      <p class="text-xs text-gray-500">
+        Desarrollado por devs, para devs
+      </p>
+      
+      <div class="flex flex-wrap items-center justify-center gap-6">
+        <app-animated-tooltip [items]="instructors"></app-animated-tooltip>
+        <app-tech-stack></app-tech-stack>
+      </div>
+    </div>
+  </div>
+</section>

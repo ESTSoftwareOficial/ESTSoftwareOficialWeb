@@ -1,0 +1,31 @@
+<div class="flex">
+  <div 
+    *ngFor="let item of items"
+    class="relative -mr-4 group"
+    (mouseenter)="onMouseEnter(item.id)"
+    (mouseleave)="onMouseLeave()">
+    
+    <div 
+      *ngIf="hoveredIndex === item.id"
+      [ngStyle]="getTooltipStyle(item.id)"
+      class="absolute -top-16 left-1/2 z-50 flex flex-col items-center justify-center rounded-md bg-black px-4 py-2 text-xs shadow-xl whitespace-nowrap tooltip-enter">
+      
+      <div class="absolute inset-x-10 -bottom-px z-30 h-px w-[20%] bg-gradient-to-r from-transparent via-emerald-500 to-transparent"></div>
+      <div class="absolute -bottom-px left-10 z-30 h-px w-[40%] bg-gradient-to-r from-transparent via-sky-500 to-transparent"></div>
+      
+      <div class="relative z-30 text-base font-bold text-white">
+        {{ item.name }}
+      </div>
+      <div class="text-xs text-white">
+        {{ item.designation }}
+      </div>
+    </div>
+
+    <img
+      (mousemove)="onMouseMove($event, avatarImg)"
+      #avatarImg
+      [src]="item.image"
+      [alt]="item.name"
+      class="relative h-14 w-14 rounded-full border-2 border-white object-cover object-top transition duration-500 group-hover:z-30 group-hover:scale-105 cursor-pointer" />
+  </div>
+</div>
