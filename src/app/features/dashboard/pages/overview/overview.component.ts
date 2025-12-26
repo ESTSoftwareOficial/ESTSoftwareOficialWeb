@@ -1,14 +1,18 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NavbarComponent } from "../../components/navbar/navbar.component";
+import { BannerComponent } from "../../components/banner/banner.component";
 
 @Component({
   selector: 'app-overview',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, NavbarComponent, BannerComponent],
   templateUrl: './overview.component.html',
   styleUrl: './overview.component.css'
 })
 export class OverviewComponent {
+  userName: string = 'Ameth Toledo'
+
   stats = [
     { label: 'Cursos Completados', value: '12', icon: '✅', color: 'from-green-500 to-emerald-600' },
     { label: 'Cursos en Progreso', value: '5', icon: '📚', color: 'from-blue-500 to-cyan-600' },

@@ -13,22 +13,27 @@ export const DASHBOARD_ROUTES: Routes = [
       },
       {
         path: 'overview',
+        title: 'Inicio',
         loadComponent: () => import('./pages/overview/overview.component').then(m => m.OverviewComponent)
       },
       {
         path: 'my-courses',
+        title: 'Cursos',
         loadComponent: () => import('../users/components/my-courses/my-courses.component').then(m => m.MyCoursesComponent)
       },
       {
         path: 'profile',
+        title: 'Perfil',
         loadComponent: () => import('../users/components/profile/profile.component').then(m => m.ProfileComponent)
       },
       {
         path: 'payment-history',
+        title: 'Pagos',
         loadComponent: () => import('../payments/components/payment-history/payment-history.component').then(m => m.PaymentHistoryComponent)
       },
       {
         path: 'settings',
+        title: 'Configuración',
         loadComponent: () => import('./pages/settings/settings.component').then(m => m.SettingsComponent)
       }
     ]

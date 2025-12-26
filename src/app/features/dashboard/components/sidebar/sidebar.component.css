@@ -2,6 +2,10 @@ aside {
   overflow: hidden;
 }
 
+aside:hover {
+  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.5);
+}
+
 span {
   transition-property: opacity, width, transform;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -9,4 +13,10 @@ span {
 
 .group\/sidebar:hover svg {
   transform: scale(1.05);
+}
+
+nav a,
+div > a,
+div > button {
+  min-width: 44px;
 }

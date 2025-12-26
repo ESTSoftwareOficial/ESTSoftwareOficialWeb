@@ -1,9 +1,9 @@
 import { Routes } from '@angular/router';
-import { LoginComponent } from './components/login/login.component';
-import { RegisterComponent } from './components/register/register.component';
+import { LoginComponent } from './pages/login/login.component';
+import { RegisterComponent } from './pages/register/register.component';
 
 export const AUTH_ROUTES: Routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full' },
-    { path: 'login', component: LoginComponent },
-    { path: 'register', component: RegisterComponent }
+    { path: 'login', title: 'EST Software: Login', component: LoginComponent },
+    { path: 'register', title: 'EST Software: Registro' , component: RegisterComponent }
 ]
