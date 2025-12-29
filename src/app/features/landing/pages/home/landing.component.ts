@@ -3,11 +3,12 @@ import { HeroComponent } from "../../components/hero/hero.component";
 import { HeaderComponent } from '../../../../shared/components/header/header.component';
 import { TechLanguagesGridComponent } from "../../components/tech-languages-grid/tech-languages-grid.component";
 import { LinuxLearningSectionComponent } from "../../components/linux-learning-section/linux-learning-section.component";
+import { GithubLearningComponent } from "../../components/github-learning/github-learning.component";
 
 @Component({
   selector: 'app-landing',
   standalone: true,
-  imports: [HeroComponent, HeaderComponent, TechLanguagesGridComponent, LinuxLearningSectionComponent],
+  imports: [HeroComponent, HeaderComponent, TechLanguagesGridComponent, LinuxLearningSectionComponent, GithubLearningComponent],
   templateUrl: './landing.component.html',
   styleUrl: './landing.component.css'
 })

@@ -16,7 +16,9 @@
   </div>
 
   <div class="flex items-center gap-4">
-    <button class="relative p-2 hover:bg-neutral-900 rounded-lg transition-colors">
+    <button 
+      (click)="toggleNotifications()"
+      class="relative p-2 hover:bg-neutral-900 rounded-lg transition-colors">
       <lucide-icon 
         [img]="Bell" 
         [size]="24" 
@@ -96,3 +98,8 @@
     </div>
   </div>
 </header>
+
+<app-notify-modal 
+  [isOpen]="isNotificationsOpen" 
+  (closeModal)="closeNotifications()">
+</app-notify-modal>

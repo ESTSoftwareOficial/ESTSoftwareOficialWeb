@@ -1,13 +1,10 @@
-export interface User {
-  id: number;
+export interface RegisterRequest {
   firstName: string;
   secondName: string;
   lastName: string;
   secondLastName: string;
   email: string;
   secondaryEmail?: string;
-  profilePhoto?: string;
-  registrationDate: string;
+  password: string;
   roleId: number;
-  oauthProvider?: string;
 }

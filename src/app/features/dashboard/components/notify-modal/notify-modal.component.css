@@ -1,0 +1,22 @@
+.overflow-y-auto::-webkit-scrollbar {
+  width: 8px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-track {
+  background: #171717;
+  border-radius: 10px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb {
+  background: #22C55E;
+  border-radius: 10px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb:hover {
+  background: #16a34a;
+}
+
+.overflow-y-auto {
+  scrollbar-width: thin;
+  scrollbar-color: #22C55E #171717;
+}

@@ -2,11 +2,13 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { LucideAngularModule, LogIn, Eye, EyeOff } from 'lucide-angular';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, LucideAngularModule],
+  imports: [CommonModule, FormsModule, LucideAngularModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -21,11 +23,36 @@ export class LoginComponent {
   email: string = '';
   password: string = '';
   rememberMe: boolean = false;
+  
+  isLoading: boolean = false;
+  errorMessage: string = '';
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private authService: AuthService
+  ) {}
 
   onSubmit() {
-    console.log('Login:', { email: this.email, password: this.password, rememberMe: this.rememberMe });
+    if (!this.email || !this.password) {
+      this.errorMessage = 'Por favor completa todos los campos';
+      return;
+    }
+
+    this.isLoading = true;
+    this.errorMessage = '';
+
+    this.authService.login({ email: this.email, password: this.password }).subscribe({
+      next: (response) => {
+        console.log('Login exitoso:', response);
+        this.isLoading = false;
+        this.router.navigate(['/dashboard']);
+      },
+      error: (error) => {
+        console.error('Error en login:', error);
+        this.isLoading = false;
+        this.errorMessage = error.error?.error || 'Error al iniciar sesión';
+      }
+    });
   }
 
   togglePasswordVisibility() {
