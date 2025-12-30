@@ -1,0 +1,47 @@
+<div class="w-full bg-[#111215] rounded-xl overflow-hidden">
+  <div class="flex items-center justify-between p-6 border-b border-neutral-800">
+    <h2 class="text-xl font-bold text-white flex items-center gap-2">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-[#22C55E]">
+        <path d="M19.5 21a3 3 0 003-3v-4.5a3 3 0 00-3-3h-15a3 3 0 00-3 3V18a3 3 0 003 3h15zM1.5 10.146V6a3 3 0 013-3h5.379a2.25 2.25 0 011.59.659l2.122 2.121c.14.141.331.22.53.22H19.5a3 3 0 013 3v1.146A4.483 4.483 0 0019.5 9h-15a4.483 4.483 0 00-3 1.146z" />
+      </svg>
+      Recursos del curso
+    </h2>
+    <span class="text-sm text-gray-400">{{ resources.length }} recursos</span>
+  </div>
+
+  <div class="p-6 space-y-4">
+    <div *ngFor="let resource of resources" 
+      (click)="openResource(resource.url)"
+      class="flex items-start gap-4 p-4 bg-[#1d1d1d] rounded-lg hover:bg-[#252525] transition-all duration-300 cursor-pointer group">
+      
+      <div class="w-12 h-12 rounded-lg bg-[#0a0a0c] flex items-center justify-center flex-shrink-0 group-hover:bg-[#22C55E]/20 transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" 
+          viewBox="0 0 24 24" 
+          class="w-6 h-6"
+          [style.color]="getPlatformInfo(resource.platform).color"
+          [innerHTML]="getPlatformInfo(resource.platform).icon">
+        </svg>
+      </div>
+      
+      <div class="flex-1 min-w-0">
+        <div class="flex items-center gap-2 mb-1">
+          <h3 class="text-base font-semibold text-white group-hover:text-[#22C55E] transition-colors">
+            {{ resource.title }}
+          </h3>
+          <span class="px-2 py-0.5 text-xs font-medium bg-[#0a0a0c] text-gray-400 rounded">
+            {{ getPlatformInfo(resource.platform).name }}
+          </span>
+        </div>
+        <p class="text-sm text-gray-400 leading-relaxed">
+          {{ resource.description }}
+        </p>
+      </div>
+
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-gray-500 group-hover:text-[#22C55E] transition-colors flex-shrink-0">
+        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+        <polyline points="15 3 21 3 21 9"></polyline>
+        <line x1="10" y1="14" x2="21" y2="3"></line>
+      </svg>
+    </div>
+  </div>
+</div>

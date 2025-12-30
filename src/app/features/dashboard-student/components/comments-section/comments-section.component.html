@@ -1,0 +1,121 @@
+<div class="w-full bg-[#111215] rounded-xl overflow-hidden p-6">
+  <div class="flex items-center justify-between mb-6">
+    <h2 class="text-xl font-bold text-white flex items-center gap-2">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-[#22C55E]">
+        <path fill-rule="evenodd" d="M4.804 21.644A6.707 6.707 0 006 21.75a6.721 6.721 0 003.583-1.029c.774.182 1.584.279 2.417.279 5.322 0 9.75-3.97 9.75-9 0-5.03-4.428-9-9.75-9s-9.75 3.97-9.75 9c0 2.409 1.025 4.587 2.674 6.192.232.226.277.428.254.543a3.73 3.73 0 01-.814 1.686.75.75 0 00.44 1.223zM8.25 10.875a1.125 1.125 0 100 2.25 1.125 1.125 0 000-2.25zM10.875 12a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0zm4.875-1.125a1.125 1.125 0 100 2.25 1.125 1.125 0 000-2.25z" clip-rule="evenodd" />
+      </svg>
+      {{ comments.length }} Comentarios
+    </h2>
+    
+    <div class="flex gap-2">
+      <button 
+        (click)="sortBy = 'recent'"
+        [ngClass]="sortBy === 'recent' ? 'bg-[#22C55E] text-black' : 'bg-[#1d1d1d] text-gray-400'"
+        class="px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300">
+        Recientes
+      </button>
+      <button 
+        (click)="sortBy = 'popular'"
+        [ngClass]="sortBy === 'popular' ? 'bg-[#22C55E] text-black' : 'bg-[#1d1d1d] text-gray-400'"
+        class="px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300">
+        Populares
+      </button>
+    </div>
+  </div>
+
+  <div class="mb-6">
+    <div class="flex gap-3">
+      <div class="w-10 h-10 rounded-full overflow-hidden bg-[#22C55E] shrink-0">
+        <img src="assets/ameth.png" alt="Tu avatar" class="w-full h-full object-cover">
+      </div>
+      <div class="flex-1">
+        <textarea 
+          [(ngModel)]="newComment"
+          placeholder="Agrega un comentario..."
+          rows="3"
+          class="w-full bg-[#1d1d1d] border border-neutral-800 text-white rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#22C55E] focus:border-transparent resize-none placeholder:text-gray-500"></textarea>
+        <div class="flex justify-end gap-2 mt-2">
+          <button 
+            (click)="newComment = ''"
+            class="px-4 py-2 text-sm font-medium text-gray-400 hover:text-white transition-colors">
+            Cancelar
+          </button>
+          <button 
+            (click)="addComment()"
+            [disabled]="!newComment.trim()"
+            class="px-6 py-2 bg-[#22C55E] hover:bg-[#16a34a] text-black font-semibold rounded-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed">
+            Comentar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="h-px bg-gradient-to-r from-transparent via-neutral-700 to-transparent mb-6"></div>
+
+  <div class="space-y-6">
+    <div *ngFor="let comment of sortedComments" class="space-y-4">
+      <div class="flex gap-3">
+        <div class="w-10 h-10 rounded-full overflow-hidden bg-[#22C55E] shrink-0">
+          <img [src]="comment.userAvatar" [alt]="comment.user" class="w-full h-full object-cover">
+        </div>
+        
+        <div class="flex-1">
+          <div class="bg-[#1d1d1d] rounded-lg p-4">
+            <div class="flex items-center justify-between mb-2">
+              <h4 class="text-sm font-semibold text-white">{{ comment.user }}</h4>
+              <span class="text-xs text-gray-500">{{ comment.timestamp }}</span>
+            </div>
+            <p class="text-sm text-gray-300 leading-relaxed">{{ comment.comment }}</p>
+          </div>
+          
+          <div class="flex items-center gap-4 mt-2 ml-4">
+            <button 
+              (click)="toggleLike(comment)"
+              class="flex items-center gap-1 text-sm transition-colors"
+              [ngClass]="comment.userHasLiked ? 'text-red-400' : 'text-gray-400 hover:text-white'">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" [attr.fill]="comment.userHasLiked ? 'currentColor' : 'none'" stroke="currentColor" stroke-width="2" class="w-4 h-4">
+                <path d="M7.493 18.75c-.425 0-.82-.236-.975-.632A7.48 7.48 0 016 15.375c0-1.75.599-3.358 1.602-4.634.151-.192.373-.309.6-.397.473-.183.89-.514 1.212-.924a9.042 9.042 0 012.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 00.322-1.672V3a.75.75 0 01.75-.75 2.25 2.25 0 012.25 2.25c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 01-2.649 7.521c-.388.482-.987.729-1.605.729H14.23c-.483 0-.964-.078-1.423-.23l-3.114-1.04a4.501 4.501 0 00-1.423-.23h-.777zM2.331 10.977a11.969 11.969 0 00-.831 4.398 12 12 0 00.52 3.507c.26.85 1.084 1.368 1.973 1.368H4.9c.445 0 .72-.498.523-.898a8.963 8.963 0 01-.924-3.977c0-1.708.476-3.305 1.302-4.666.245-.403-.028-.959-.5-.959H4.25c-.832 0-1.612.453-1.918 1.227z" />
+              </svg>
+              {{ comment.likes }}
+            </button>
+            
+            <button class="text-xs text-gray-400 hover:text-white font-medium transition-colors">
+              Responder
+            </button>
+          </div>
+
+          <div *ngIf="comment.replies && comment.replies.length > 0" class="ml-8 mt-4 space-y-4">
+            <div *ngFor="let reply of comment.replies" class="flex gap-3">
+              <div class="w-8 h-8 rounded-full overflow-hidden bg-[#22C55E] shrink-0">
+                <img [src]="reply.userAvatar" [alt]="reply.user" class="w-full h-full object-cover">
+              </div>
+              
+              <div class="flex-1">
+                <div class="bg-[#0a0a0c] rounded-lg p-3">
+                  <div class="flex items-center justify-between mb-1">
+                    <h5 class="text-sm font-semibold text-white">{{ reply.user }}</h5>
+                    <span class="text-xs text-gray-500">{{ reply.timestamp }}</span>
+                  </div>
+                  <p class="text-sm text-gray-300 leading-relaxed">{{ reply.comment }}</p>
+                </div>
+                
+                <div class="flex items-center gap-4 mt-2 ml-3">
+                  <button 
+                    (click)="toggleLike(reply)"
+                    class="flex items-center gap-1 text-xs transition-colors"
+                    [ngClass]="reply.userHasLiked ? 'text-red-400' : 'text-gray-400 hover:text-white'">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" [attr.fill]="reply.userHasLiked ? 'currentColor' : 'none'" stroke="currentColor" stroke-width="2" class="w-4 h-4">
+                      <path d="M7.493 18.75c-.425 0-.82-.236-.975-.632A7.48 7.48 0 016 15.375c0-1.75.599-3.358 1.602-4.634.151-.192.373-.309.6-.397.473-.183.89-.514 1.212-.924a9.042 9.042 0 012.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 00.322-1.672V3a.75.75 0 01.75-.75 2.25 2.25 0 012.25 2.25c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 01-2.649 7.521c-.388.482-.987.729-1.605.729H14.23c-.483 0-.964-.078-1.423-.23l-3.114-1.04a4.501 4.501 0 00-1.423-.23h-.777zM2.331 10.977a11.969 11.969 0 00-.831 4.398 12 12 0 00.52 3.507c.26.85 1.084 1.368 1.973 1.368H4.9c.445 0 .72-.498.523-.898a8.963 8.963 0 01-.924-3.977c0-1.708.476-3.305 1.302-4.666.245-.403-.028-.959-.5-.959H4.25c-.832 0-1.612.453-1.918 1.227z" />
+                    </svg>
+                    {{ reply.likes }}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

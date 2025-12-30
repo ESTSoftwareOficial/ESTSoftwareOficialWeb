@@ -5,6 +5,9 @@ import { CommonModule } from '@angular/common';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Pipe, PipeTransform } from '@angular/core';
 import { NavbarComponent } from "../../components/navbar/navbar.component";
+import { DescriptionLessonComponent } from "../../components/description-lesson/description-lesson.component";
+import { CommentsSectionComponent } from "../../components/comments-section/comments-section.component";
+import { LessonResourcesComponent } from "../../components/lesson-resources/lesson-resources.component";
 
 @Pipe({
   name: 'safe',
@@ -34,7 +37,7 @@ interface Lesson {
 @Component({
   selector: 'app-lesson',
   standalone: true,
-  imports: [CommonModule, SafePipe, NavbarComponent],
+  imports: [CommonModule, SafePipe, NavbarComponent, DescriptionLessonComponent, CommentsSectionComponent, LessonResourcesComponent],
   templateUrl: './lesson.component.html',
   styleUrl: './lesson.component.css'
 })
