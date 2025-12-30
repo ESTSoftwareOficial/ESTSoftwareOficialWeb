@@ -1,0 +1,107 @@
+<div class="sticky top-24 bg-gradient-to-br from-[#0f1419] to-[#111215] rounded-2xl p-6 space-y-6 shadow-2xl">
+  <div class="relative overflow-hidden">
+    <div class="absolute top-0 right-0 w-32 h-32 bg-[#22C55E]/10 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-0 left-0 w-32 h-32 bg-blue-500/10 rounded-full blur-3xl"></div>
+    
+    <div class="relative space-y-4">
+      <div class="flex items-center justify-between">
+        <h3 class="text-2xl font-bold text-white">¡Oferta Especial!</h3>
+        <div class="animate-pulse">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-[#22C55E]">
+            <path fill-rule="evenodd" d="M12.963 2.286a.75.75 0 00-1.071-.136 9.742 9.742 0 00-3.539 6.177A7.547 7.547 0 016.648 6.61a.75.75 0 00-1.152-.082A9 9 0 1015.68 4.534a7.46 7.46 0 01-2.717-2.248zM15.75 14.25a3.75 3.75 0 11-7.313-1.172c.628.465 1.35.81 2.133 1a5.99 5.99 0 011.925-3.545 3.75 3.75 0 013.255 3.717z" clip-rule="evenodd" />
+          </svg>
+        </div>
+      </div>
+      
+      <div class="space-y-3">
+        <div class="flex items-center gap-3">
+          <span class="text-gray-400 line-through text-xl">${{ originalPrice }}</span>
+          <span class="px-3 py-1.5 bg-gradient-to-r from-[#22C55E] to-[#16a34a] text-black text-sm font-bold rounded-full animate-pulse shadow-lg shadow-[#22C55E]/50">
+            -{{ discountPercentage }}% OFF
+          </span>
+        </div>
+        
+        <div class="flex items-baseline gap-2">
+          <span class="text-5xl font-black bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">${{ discountedPrice }}</span>
+          <span class="text-gray-400 text-lg font-semibold">MXN</span>
+        </div>
+
+        <p class="text-sm text-[#22C55E] font-semibold">
+          💰 Ahorras ${{ originalPrice - discountedPrice }} MXN
+        </p>
+      </div>
+
+      <button class="w-full bg-transparent border-2 border-[#22C55E] hover:bg-[#22C55E] text-[#22C55E] hover:text-black font-bold py-4 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-[#22C55E]/50 relative overflow-hidden group">
+        <span class="relative z-10 flex items-center justify-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
+            <path d="M2.25 2.25a.75.75 0 000 1.5h1.386c.17 0 .318.114.362.278l2.558 9.592a3.752 3.752 0 00-2.806 3.63c0 .414.336.75.75.75h15.75a.75.75 0 000-1.5H5.378A2.25 2.25 0 017.5 15h11.218a.75.75 0 00.674-.421 60.358 60.358 0 002.96-7.228.75.75 0 00-.525-.965A60.864 60.864 0 005.68 4.509l-.232-.867A1.875 1.875 0 003.636 2.25H2.25zM3.75 20.25a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM16.5 20.25a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z" />
+          </svg>
+          Comprar Ahora
+        </span>
+      </button>
+
+      <div class="pt-4 space-y-2">
+        <div class="flex items-center justify-between bg-[#1d1f23]/50 rounded-lg p-3">
+          <div>
+            <p class="text-xs text-gray-400">o paga en mensualidades</p>
+            <div class="flex items-baseline gap-2 mt-1">
+              <span class="text-2xl font-bold text-white">${{ monthlyPrice }}</span>
+              <span class="text-gray-400 text-sm">MXN/mes</span>
+            </div>
+          </div>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 text-[#22C55E]">
+            <path d="M4.5 3.75a3 3 0 00-3 3v.75h21v-.75a3 3 0 00-3-3h-15z" />
+            <path fill-rule="evenodd" d="M22.5 9.75h-21v7.5a3 3 0 003 3h15a3 3 0 003-3v-7.5zm-18 3.75a.75.75 0 01.75-.75h6a.75.75 0 010 1.5h-6a.75.75 0 01-.75-.75zm.75 2.25a.75.75 0 000 1.5h3a.75.75 0 000-1.5h-3z" clip-rule="evenodd" />
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pt-4 space-y-3">
+    <p class="text-base font-bold text-white flex items-center gap-2">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-[#22C55E]">
+        <path fill-rule="evenodd" d="M8.603 3.799A4.49 4.49 0 0112 2.25c1.357 0 2.573.6 3.397 1.549a4.49 4.49 0 013.498 1.307 4.491 4.491 0 011.307 3.497A4.49 4.49 0 0121.75 12a4.49 4.49 0 01-1.549 3.397 4.491 4.491 0 01-1.307 3.497 4.491 4.491 0 01-3.497 1.307A4.49 4.49 0 0112 21.75a4.49 4.49 0 01-3.397-1.549 4.49 4.49 0 01-3.498-1.306 4.491 4.491 0 01-1.307-3.498A4.49 4.49 0 012.25 12c0-1.357.6-2.573 1.549-3.397a4.49 4.49 0 011.307-3.497 4.49 4.49 0 013.497-1.307zm7.007 6.387a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
+      </svg>
+      Este curso incluye:
+    </p>
+    
+    <div class="space-y-2.5">
+      <div class="flex items-center gap-3 text-sm text-gray-300 bg-[#1d1f23]/30 rounded-lg p-2 hover:bg-[#1d1f23]/50 transition-colors">
+        <div class="w-6 h-6 rounded-full bg-[#22C55E]/20 flex items-center justify-center flex-shrink-0">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 text-[#22C55E]">
+            <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
+          </svg>
+        </div>
+        <span class="font-medium">Acceso de por vida</span>
+      </div>
+
+      <div class="flex items-center gap-3 text-sm text-gray-300 bg-[#1d1f23]/30 rounded-lg p-2 hover:bg-[#1d1f23]/50 transition-colors">
+        <div class="w-6 h-6 rounded-full bg-[#22C55E]/20 flex items-center justify-center flex-shrink-0">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 text-[#22C55E]">
+            <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
+          </svg>
+        </div>
+        <span class="font-medium">Certificado de finalización</span>
+      </div>
+
+      <div class="flex items-center gap-3 text-sm text-gray-300 bg-[#1d1f23]/30 rounded-lg p-2 hover:bg-[#1d1f23]/50 transition-colors">
+        <div class="w-6 h-6 rounded-full bg-[#22C55E]/20 flex items-center justify-center flex-shrink-0">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 text-[#22C55E]">
+            <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
+          </svg>
+        </div>
+        <span class="font-medium">Soporte del instructor</span>
+      </div>
+
+      <div class="flex items-center gap-3 text-sm text-gray-300 bg-[#1d1f23]/30 rounded-lg p-2 hover:bg-[#1d1f23]/50 transition-colors">
+        <div class="w-6 h-6 rounded-full bg-[#22C55E]/20 flex items-center justify-center flex-shrink-0">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 text-[#22C55E]">
+            <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
+          </svg>
+        </div>
+        <span class="font-medium">Recursos descargables</span>
+      </div>
+    </div>
+  </div>
+</div>  

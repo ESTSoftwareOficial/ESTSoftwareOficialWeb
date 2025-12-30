@@ -1,0 +1,37 @@
+<div class="overflow-hidden">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 p-6">
+    <div class="md:col-span-1">
+      <img [src]="courseImage" [alt]="courseName" class="w-full h-full object-cover rounded-lg">
+    </div>
+    
+    <div class="md:col-span-2 flex flex-col justify-between">
+      <div>
+        <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">{{ courseTitle }}</h1>
+        <p class="text-gray-400 mb-6">{{ courseDescription }}</p>
+      </div>
+      
+      <div class="flex flex-wrap gap-4 text-sm">
+        <div class="flex items-center gap-2 text-gray-400">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
+            <path fill-rule="evenodd" d="M6.75 2.25A.75.75 0 017.5 3v1.5h9V3A.75.75 0 0118 3v1.5h.75a3 3 0 013 3v11.25a3 3 0 01-3 3H5.25a3 3 0 01-3-3V7.5a3 3 0 013-3H6V3a.75.75 0 01.75-.75zm13.5 9a1.5 1.5 0 00-1.5-1.5H5.25a1.5 1.5 0 00-1.5 1.5v7.5a1.5 1.5 0 001.5 1.5h13.5a1.5 1.5 0 001.5-1.5v-7.5z" clip-rule="evenodd" />
+          </svg>
+          <span>Publicado el {{ publishDate }}</span>
+        </div>
+        
+        <div class="flex items-center gap-2 text-gray-400">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
+            <path fill-rule="evenodd" d="M2.25 6a3 3 0 013-3h13.5a3 3 0 013 3v12a3 3 0 01-3 3H5.25a3 3 0 01-3-3V6zm3.97.97a.75.75 0 011.06 0l2.25 2.25a.75.75 0 010 1.06l-2.25 2.25a.75.75 0 01-1.06-1.06l1.72-1.72-1.72-1.72a.75.75 0 010-1.06zm4.28 4.28a.75.75 0 000 1.5h5.25a.75.75 0 000-1.5H10.5z" clip-rule="evenodd" />
+          </svg>
+          <span>Nivel: {{ courseLevel }}</span>
+        </div>
+        
+        <div class="flex items-center gap-2 text-gray-400">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
+            <path d="M11.25 4.533A9.707 9.707 0 006 3a9.735 9.735 0 00-3.25.555.75.75 0 00-.5.707v14.25a.75.75 0 001 .707A8.237 8.237 0 016 18.75c1.995 0 3.823.707 5.25 1.886V4.533zM12.75 20.636A8.214 8.214 0 0118 18.75c.966 0 1.89.166 2.75.47a.75.75 0 001-.708V4.262a.75.75 0 00-.5-.707A9.735 9.735 0 0018 3a9.707 9.707 0 00-5.25 1.533v16.103z" />
+          </svg>
+          <span>{{ totalModules }} módulos</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

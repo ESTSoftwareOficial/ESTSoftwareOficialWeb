@@ -19,7 +19,7 @@ export const DASHBOARD_ROUTES: Routes = [
       {
         path: 'my-courses',
         title: 'Cursos',
-        loadComponent: () => import('../users/components/my-courses/my-courses.component').then(m => m.MyCoursesComponent)
+        loadComponent: () => import('./pages/courses/courses.component').then(m => m.CoursesComponent)
       },
       {
         path: 'profile',
@@ -35,6 +35,14 @@ export const DASHBOARD_ROUTES: Routes = [
         path: 'settings',
         title: 'Configuración',
         loadComponent: () => import('./pages/settings/settings.component').then(m => m.SettingsComponent)
+      },
+      {
+        path: 'courses/:name', 
+        loadComponent: () => import('./pages/course-detail/course-detail.component').then(m => m.CourseDetailComponent) 
+      },
+      {
+        path: 'courses/:courseName/lesson/:lessonId',
+        loadComponent: () => import('./pages/lesson/lesson.component').then(m => m.LessonComponent)
       }
     ]
   }

@@ -1,0 +1,30 @@
+<div class="space-y-8">
+  <app-navbar></app-navbar>
+  
+  <app-course-header
+    [courseImage]="courseImage"
+    [courseName]="courseName"
+    [courseTitle]="courseTitle"
+    [courseDescription]="courseDescription"
+    [publishDate]="publishDate"
+    [courseLevel]="courseLevel"
+    [totalModules]="totalModules">
+  </app-course-header>
+  
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 px-6">
+    <div class="lg:col-span-2">
+      <app-module-timeline 
+        [modules]="modules"
+        [courseName]="courseTitle">
+      </app-module-timeline>
+    </div>
+    
+    <div class="lg:col-span-1">
+      <app-course-pricing
+        [originalPrice]="originalPrice"
+        [discountedPrice]="discountedPrice"
+        [monthlyPrice]="monthlyPrice">
+      </app-course-pricing>
+    </div>
+  </div>
+</div>
