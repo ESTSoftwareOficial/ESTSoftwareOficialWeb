@@ -1,0 +1,47 @@
+<div *ngIf="isOpen" class="modal-overlay fixed inset-0 bg-black/80 backdrop-blur-sm z-[9999] flex items-center justify-center p-4" style="opacity: 0;">
+  <div class="modal-content bg-[#111215] rounded-2xl max-w-md w-full overflow-hidden shadow-2xl" style="opacity: 0; transform: scale(0.9) translateY(20px);" [ngClass]="getModalBorder()">
+    
+    <div class="p-6 flex items-start gap-4" [ngClass]="getHeaderBg()">
+      <div class="flex-shrink-0 w-14 h-14 rounded-full flex items-center justify-center p-2 bg-white shadow-lg">
+        <img src="assets/logo.svg" alt="EST Software" class="w-full h-full object-contain">
+      </div>
+      
+      <div class="flex-1">
+        <div class="flex items-center gap-2 mb-2">
+          <div class="w-6 h-6 rounded-full flex items-center justify-center" [ngClass]="getStatusIconBg()">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" 
+                 class="w-4 h-4" [ngClass]="getStatusIconColor()" [innerHTML]="getIcon()">
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold" [ngClass]="getTitleColor()">{{ title }}</h3>
+        </div>
+        <p class="text-gray-300 text-sm leading-relaxed">{{ message }}</p>
+      </div>
+
+      <button (click)="handleClose()" class="flex-shrink-0 text-gray-400 hover:text-white transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-5 h-5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <div class="px-6 pb-6 flex gap-3">
+      <button 
+        *ngIf="showCancel"
+        (click)="handleCancel()"
+        class="flex-1 px-4 py-2.5 bg-neutral-800 hover:bg-neutral-700 text-white font-semibold rounded-lg transition-all duration-200 text-sm">
+        {{ cancelText }}
+      </button>
+      
+      <button 
+        (click)="handleConfirm()"
+        class="px-4 py-2.5 bg-transparent border-2 text-white font-semibold rounded-lg transition-all duration-300 text-sm hover:scale-[1.02] flex items-center justify-center gap-2"
+        [ngClass]="getButtonClasses()"
+        [class.flex-1]="showCancel"
+        [class.w-full]="!showCancel">
+        <lucide-icon [img]="getButtonIcon()" [size]="18"></lucide-icon>
+        {{ confirmText }}
+      </button>
+    </div>
+  </div>
+</div>

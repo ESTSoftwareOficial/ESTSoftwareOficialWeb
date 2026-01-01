@@ -1,0 +1,69 @@
+<div class="w-full bg-white md:px-10" #containerRef>
+    <div class="max-w-7xl mx-auto py-10 px-4 md:px-8 lg:px-10">
+        <div class="flex items-start gap-6">
+            <img src="assets/logo.svg" alt="ESTSoftware Logo" class="w-24 h-24 md:w-32 md:h-32 flex-shrink-0">
+            <div class="text-4xl md:text-5xl font-bold text-gray-900 mb-8">
+                Ruta de Aprendizaje en
+                <app-pointer-highlight>
+                    <span class="inline-block px-1">ESTSoftware</span>
+                </app-pointer-highlight>
+            </div>
+        </div>
+        <p class="text-neutral-700 text-sm md:text-base mt-4 ml-6">
+            Domina el desarrollo web completo con nuestra ruta de aprendizaje estructurada.
+            Desde frontend hasta DevOps.
+        </p>
+    </div>
+
+    <div #lineRef class="relative max-w-7xl mx-auto pb-20">
+        <div *ngFor="let item of data; let index = index" class="flex justify-start md:gap-10"
+            [class.pt-10]="index === 0" [class.pt-10]="index !== 0" [class.md:pt-20]="index === 0"
+            [class.md:pt-40]="index !== 0">
+
+            <div
+                class="sticky flex flex-col md:flex-row z-40 items-center top-40 self-start max-w-xs lg:max-w-sm md:w-full">
+                <div class="h-10 absolute left-3 md:left-3 w-10 rounded-full bg-white flex items-center justify-center">
+                    <div class="h-4 w-4 rounded-full bg-neutral-200 border border-neutral-300 p-2"></div>
+                </div>
+                <h3 class="hidden md:block text-xl md:pl-20 md:text-5xl font-bold">
+                    {{ item.title }}
+                </h3>
+            </div>
+
+            <div class="relative pl-20 pr-4 md:pl-4 w-full">
+                <h3 class="md:hidden block text-2xl mb-4 text-left font-bold text-neutral-500">
+                    {{ item.title }}
+                </h3>
+
+                <div>
+                    <p *ngFor="let desc of item.content.description"
+                        class="mb-8 text-xs font-normal text-neutral-800 md:text-sm">
+                        {{ desc }}
+                    </p>
+
+                    <div *ngIf="item.content.items" class="mb-8">
+                        <div *ngFor="let contentItem of item.content.items"
+                            class="flex items-center gap-2 text-xs text-neutral-700 md:text-sm">
+                            <lucide-icon [img]="Check" class="w-4 h-4 text-green-600"></lucide-icon>
+                            {{ contentItem }}
+                        </div>
+                    </div>
+
+                    <div *ngIf="item.content.images" class="grid grid-cols-2 gap-4">
+                        <div *ngFor="let image of item.content.images" class="overflow-hidden rounded-lg">
+                            <img [src]="image" [alt]="item.title"
+                                class="cursor-pointer h-20 w-full object-cover shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset] md:h-44 lg:h-60 transition-transform duration-300 hover:scale-110" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="absolute md:left-8 left-8 top-0 overflow-hidden w-[2px] bg-[linear-gradient(to_bottom,var(--tw-gradient-stops))] from-transparent from-[0%] via-neutral-200 to-transparent to-[99%] [mask-image:linear-gradient(to_bottom,transparent_0%,black_10%,black_90%,transparent_100%)]"
+            [style.height.px]="height">
+            <div class="absolute inset-x-0 top-0 w-[2px] bg-gradient-to-t from-purple-500 via-blue-500 to-transparent from-[0%] via-[10%] rounded-full transition-all duration-300"
+                [style.height]="getLineHeight()" [style.opacity]="getLineOpacity()">
+            </div>
+        </div>
+    </div>
+</div>

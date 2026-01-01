@@ -1,0 +1,31 @@
+<div class="relative w-fit" [ngClass]="containerClassName" #containerRef>
+  <ng-content></ng-content>
+  
+  <div *ngIf="dimensions.width > 0 && dimensions.height > 0" 
+       class="pointer-events-none absolute inset-0 z-0"
+       [class.animate-fade-in]="isVisible">
+    
+    <div class="absolute inset-0 border-2 border-black transition-all duration-1000 ease-in-out"
+         [ngClass]="rectangleClassName"
+         [class.w-full]="isVisible"
+         [class.h-full]="isVisible"
+         [class.w-0]="!isVisible"
+         [class.h-0]="!isVisible">
+    </div>
+    
+    <div class="pointer-events-none absolute transition-all duration-1000 ease-in-out"
+         [class.opacity-100]="isVisible"
+         [class.opacity-0]="!isVisible"
+         [style.transform]="'translate(' + (dimensions.width + 4) + 'px, ' + (dimensions.height + 4) + 'px) rotate(-90deg)'">
+      <svg class="h-5 w-5 text-blue-500"
+           [ngClass]="pointerClassName"
+           stroke="currentColor"
+           fill="currentColor"
+           strokeWidth="1"
+           viewBox="0 0 16 16"
+           xmlns="http://www.w3.org/2000/svg">
+        <path d="M14.082 2.182a.5.5 0 0 1 .103.557L8.528 15.467a.5.5 0 0 1-.917-.007L5.57 10.694.803 8.652a.5.5 0 0 1-.006-.916l12.728-5.657a.5.5 0 0 1 .556.103z"></path>
+      </svg>
+    </div>
+  </div>
+</div>

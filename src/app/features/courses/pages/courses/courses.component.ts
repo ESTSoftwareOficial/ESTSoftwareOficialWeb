@@ -24,7 +24,7 @@ export class CoursesComponent {
         {
           category: 'Desarrollo Web',
           title: 'Domina Angular desde cero',
-          src: 'https://ionic.io/blog/wp-content/uploads/2024/02/angular-feature-image-1-1024x512.png',
+          src: 'https://res.cloudinary.com/dzndokn0t/image/upload/v1766792659/courses/y5mc6vcusqcnoydltg59.webp',
           content: 'Aprende Angular desde los fundamentos hasta aplicaciones empresariales completas con las mejores prácticas del mercado.',
           rating: 4.5,
           level: 'Intermedio',

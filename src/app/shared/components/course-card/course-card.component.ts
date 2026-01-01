@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import type { CourseCard } from '../course-carousel/course-carousel.component';
 
 @Component({
@@ -15,31 +16,33 @@ export class CourseCardComponent {
   @Input() layout: boolean = false;
   @Output() cardClose = new EventEmitter<number>();
 
-  open = false;
-  isLoading = true;
+  @Input() imgBannerSrc: string = '';
 
-  handleOpen(): void {
-    this.open = true;
-    document.body.style.overflow = 'hidden';
-  }
+  constructor(private router: Router) {}
 
-  handleClose(): void {
-    this.open = false;
-    document.body.style.overflow = 'auto';
+  navigateToCourse() {
+    const courseName = this.card.title.toLowerCase().replace(/\s+/g, '-');
+    this.router.navigate(['/dashboard/courses', courseName]);
     this.cardClose.emit(this.index);
   }
 
-  onImageLoad(): void {
-    this.isLoading = false;
+  get imgSrc(): string {
+    return this.card.src;
   }
 
-  getStarFillPercentage(starNumber: number): number {
-    const rating = this.card.rating || 5;
-    if (rating >= starNumber) {
-      return 100;
-    } else if (rating > starNumber - 1) {
-      return (rating - (starNumber - 1)) * 100;
-    }
-    return 0;
+  get nameCourse(): string {
+    return this.card.title;
+  }
+
+  get tecnologyIcon(): string {
+    return this.card.category.charAt(0);
+  }
+
+  get teacher(): string {
+    return this.card.instructor || 'Instructor';
+  }
+
+  get averageRating(): string {
+    return (this.card.rating || 5.0).toString();
   }
 }

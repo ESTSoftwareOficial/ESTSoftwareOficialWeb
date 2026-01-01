@@ -4,11 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { LucideAngularModule, UserPlus, Eye, EyeOff } from 'lucide-angular';
 import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
+import { AlertComponent, ModalType } from '../../../../shared/components/alert/alert.component';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, FormsModule, LucideAngularModule],
+  imports: [CommonModule, FormsModule, LucideAngularModule, AlertComponent],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
@@ -20,6 +21,7 @@ export class RegisterComponent {
   isHovered: boolean = false;
   showPassword: boolean = false;
   showConfirmPassword: boolean = false;
+  selectedFileName: string = '';
   
   firstName: string = '';
   secondName: string = '';
@@ -32,8 +34,11 @@ export class RegisterComponent {
   profilePhoto: File | null = null;
   
   isLoading: boolean = false;
-  errorMessage: string = '';
-  successMessage: string = '';
+  
+  showModal: boolean = false;
+  modalType: ModalType = 'info';
+  modalTitle: string = '';
+  modalMessage: string = '';
 
   constructor(
     private router: Router,
@@ -44,18 +49,19 @@ export class RegisterComponent {
     const file = event.target.files[0];
     if (file) {
       this.profilePhoto = file;
+      this.selectedFileName = file.name;
       console.log('Foto seleccionada:', file.name);
     }
   }
 
   onSubmit() {
     if (this.password !== this.confirmPassword) {
-      this.errorMessage = 'Las contraseñas no coinciden';
+      this.showErrorModal('Las contraseñas no coinciden');
       return;
     }
 
     if (!this.firstName || !this.lastName || !this.email || !this.password) {
-      this.errorMessage = 'Por favor completa todos los campos obligatorios';
+      this.showErrorModal('Por favor completa todos los campos obligatorios');
       return;
     }
 
@@ -70,25 +76,43 @@ export class RegisterComponent {
     };
 
     this.isLoading = true;
-    this.errorMessage = '';
-    this.successMessage = '';
 
     this.authService.register(registerData, this.profilePhoto || undefined).subscribe({
       next: (response) => {
         console.log('Registro exitoso:', response);
         this.isLoading = false;
-        this.successMessage = 'Registro exitoso. Redirigiendo al login...';
-        
-        setTimeout(() => {
-          this.router.navigate(['/auth/login']);
-        }, 2000);
+        this.showSuccessModal();
       },
       error: (error) => {
         console.error('Error en registro:', error);
         this.isLoading = false;
-        this.errorMessage = error.error?.error || 'Error al registrar usuario';
+        this.showErrorModal(error.error?.error || 'Error al registrar usuario');
       }
     });
+  }
+
+  showSuccessModal() {
+    this.modalType = 'success';
+    this.modalTitle = '¡Registro exitoso!';
+    this.modalMessage = 'Tu cuenta ha sido creada correctamente. Redirigiendo al login...';
+    this.showModal = true;
+  }
+
+  showErrorModal(message: string) {
+    this.modalType = 'error';
+    this.modalTitle = 'Error';
+    this.modalMessage = message;
+    this.showModal = true;
+  }
+
+  handleModalClose() {
+    this.showModal = false;
+    
+    if (this.modalType === 'success') {
+      setTimeout(() => {
+        this.router.navigate(['/auth/login']);
+      }, 500);
+    }
   }
 
   togglePasswordVisibility() {

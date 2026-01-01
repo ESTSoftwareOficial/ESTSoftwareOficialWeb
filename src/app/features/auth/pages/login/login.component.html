@@ -115,3 +115,13 @@
     </div>
   </div>
 </div>
+
+<app-alert
+  [isOpen]="showModal"
+  [type]="modalType"
+  [title]="modalTitle"
+  [message]="modalMessage"
+  [showCancel]="false"
+  confirmText="Aceptar"
+  (onClose)="handleModalClose()">
+</app-alert>

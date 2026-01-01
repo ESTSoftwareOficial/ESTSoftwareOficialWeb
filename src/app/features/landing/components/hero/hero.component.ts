@@ -43,12 +43,12 @@ export class HeroComponent {
       designation: "Desarrollador Frontend",
       image: "assets/ivan.jpeg"
     },
-    /*{
+    {
       id: 6,
-      name: "Laura Martínez",
-      designation: "Instructora de Mobile",
-      image: "https://i.pravatar.cc/150?img=44"
-    }*/
+      name: "Christopher Ozuna",
+      designation: "Desarrollador Backend",
+      image: "assets/cristhoper.png"
+    }
   ];
 
   constructor(private router: Router) {}

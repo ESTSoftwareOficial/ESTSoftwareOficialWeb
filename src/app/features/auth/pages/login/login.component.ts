@@ -4,11 +4,12 @@ import { LucideAngularModule, LogIn, Eye, EyeOff } from 'lucide-angular';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
+import { AlertComponent, ModalType } from '../../../../shared/components/alert/alert.component';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, FormsModule, LucideAngularModule],
+  imports: [CommonModule, FormsModule, LucideAngularModule, AlertComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -25,7 +26,11 @@ export class LoginComponent {
   rememberMe: boolean = false;
   
   isLoading: boolean = false;
-  errorMessage: string = '';
+  
+  showModal: boolean = false;
+  modalType: ModalType = 'info';
+  modalTitle: string = '';
+  modalMessage: string = '';
 
   constructor(
     private router: Router,
@@ -34,25 +39,48 @@ export class LoginComponent {
 
   onSubmit() {
     if (!this.email || !this.password) {
-      this.errorMessage = 'Por favor completa todos los campos';
+      this.showErrorModal('Por favor completa todos los campos');
       return;
     }
 
     this.isLoading = true;
-    this.errorMessage = '';
 
     this.authService.login({ email: this.email, password: this.password }).subscribe({
       next: (response) => {
         console.log('Login exitoso:', response);
         this.isLoading = false;
-        this.router.navigate(['/dashboard']);
+        this.showSuccessModal();
       },
       error: (error) => {
         console.error('Error en login:', error);
         this.isLoading = false;
-        this.errorMessage = error.error?.error || 'Error al iniciar sesión';
+        this.showErrorModal(error.error?.error || 'Error al iniciar sesión');
       }
     });
+  }
+
+  showSuccessModal() {
+    this.modalType = 'success';
+    this.modalTitle = '¡Bienvenido!';
+    this.modalMessage = 'Has iniciado sesión correctamente. Redirigiendo al dashboard...';
+    this.showModal = true;
+  }
+
+  showErrorModal(message: string) {
+    this.modalType = 'error';
+    this.modalTitle = 'Error';
+    this.modalMessage = message;
+    this.showModal = true;
+  }
+
+  handleModalClose() {
+    this.showModal = false;
+    
+    if (this.modalType === 'success') {
+      setTimeout(() => {
+        this.router.navigate(['/dashboard']);
+      }, 500);
+    }
   }
 
   togglePasswordVisibility() {
