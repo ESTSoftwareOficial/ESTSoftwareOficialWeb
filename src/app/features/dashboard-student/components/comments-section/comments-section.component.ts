@@ -1,6 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, CUSTOM_ELEMENTS_SCHEMA, AfterViewInit, ViewChild, ElementRef, HostListener, ChangeDetectorRef, NgZone } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { LucideAngularModule, MessageSquare, Smile, Sticker, Film, Send, X } from 'lucide-angular';
+import 'emoji-picker-element';
 
 interface Comment {
   id: number;
@@ -16,14 +18,33 @@ interface Comment {
 @Component({
   selector: 'app-comments-section',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, LucideAngularModule],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './comments-section.component.html',
   styleUrl: './comments-section.component.css'
 })
-export class CommentsSectionComponent {
+export class CommentsSectionComponent implements AfterViewInit {
   @Input() lessonId: number = 0;
+  @ViewChild('commentTextarea') commentTextarea!: ElementRef<HTMLTextAreaElement>;
+  @ViewChild('pickerContainer') pickerContainer!: ElementRef;
+  
+  readonly MessageSquare = MessageSquare;
+  readonly Smile = Smile;
+  readonly Sticker = Sticker;
+  readonly Film = Film;
+  readonly Send = Send;
+  readonly X = X;
   
   newComment: string = '';
+  replyText: string = '';
+  showEmojiPicker: boolean = false;
+  showStickerPicker: boolean = false;
+  showGifPicker: boolean = false;
+  showReplyEmojiPicker: boolean = false;
+  replyingToComment: Comment | null = null;
+  private emojiListenerAdded = false;
+  private replyEmojiListenerAdded = false;
+  
   comments: Comment[] = [
     {
       id: 1,
@@ -62,10 +83,98 @@ export class CommentsSectionComponent {
       timestamp: 'Hace 5 horas',
       likes: 12,
       userHasLiked: false
+    },
+    {
+      id: 5,
+      user: 'Ana López',
+      userAvatar: 'assets/ameth.png',
+      comment: 'Perfecto timing, justo lo que necesitaba para mi proyecto.',
+      timestamp: 'Hace 1 día',
+      likes: 3,
+      userHasLiked: false
     }
   ];
 
   sortBy: 'recent' | 'popular' = 'recent';
+
+  constructor(private cdr: ChangeDetectorRef, private zone: NgZone) {}
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent) {
+    const target = event.target as HTMLElement;
+    if (this.pickerContainer && !this.pickerContainer.nativeElement.contains(target)) {
+      this.closeAllPickers();
+    }
+  }
+
+  ngAfterViewInit() {}
+
+  setupEmojiPicker() {
+    if (this.emojiListenerAdded) return;
+    
+    setTimeout(() => {
+      const picker = document.querySelector('emoji-picker.main-emoji-picker');
+      
+      if (picker) {
+        picker.addEventListener('emoji-click', (event: any) => {
+          this.zone.run(() => {
+            const emoji = event.detail.unicode;
+            const textarea = this.commentTextarea.nativeElement;
+            const start = textarea.selectionStart || 0;
+            const end = textarea.selectionEnd || 0;
+            
+            this.newComment = this.newComment.substring(0, start) + emoji + this.newComment.substring(end);
+            
+            setTimeout(() => {
+              textarea.focus();
+              const newPos = start + emoji.length;
+              textarea.setSelectionRange(newPos, newPos);
+              this.cdr.detectChanges();
+            }, 0);
+          });
+        });
+        
+        this.emojiListenerAdded = true;
+      }
+    }, 100);
+  }
+
+  setupReplyEmojiPicker(commentId: number) {
+    if (this.replyEmojiListenerAdded) return;
+    
+    setTimeout(() => {
+      const picker = document.querySelector(`emoji-picker.reply-emoji-picker-${commentId}`);
+      
+      if (picker) {
+        picker.addEventListener('emoji-click', (event: any) => {
+          this.zone.run(() => {
+            const emoji = event.detail.unicode;
+            const textarea = document.querySelector(`#reply-textarea-${commentId}`) as HTMLTextAreaElement;
+            
+            if (textarea) {
+              const start = textarea.selectionStart || 0;
+              const end = textarea.selectionEnd || 0;
+              
+              this.replyText = this.replyText.substring(0, start) + emoji + this.replyText.substring(end);
+              
+              setTimeout(() => {
+                textarea.focus();
+                const newPos = start + emoji.length;
+                textarea.setSelectionRange(newPos, newPos);
+                this.cdr.detectChanges();
+              }, 0);
+            }
+          });
+        });
+        
+        this.replyEmojiListenerAdded = true;
+      }
+    }, 100);
+  }
+
+  onCommentChange() {
+    this.cdr.detectChanges();
+  }
 
   addComment() {
     if (this.newComment.trim()) {
@@ -83,9 +192,88 @@ export class CommentsSectionComponent {
     }
   }
 
+  startReply(comment: Comment) {
+    this.replyingToComment = comment;
+    this.replyText = '';
+    this.replyEmojiListenerAdded = false;
+    
+    setTimeout(() => {
+      const textarea = document.querySelector(`#reply-textarea-${comment.id}`) as HTMLTextAreaElement;
+      if (textarea) {
+        textarea.focus();
+      }
+    }, 100);
+  }
+
+  cancelReply() {
+    this.replyingToComment = null;
+    this.replyText = '';
+    this.showReplyEmojiPicker = false;
+  }
+
+  addReply() {
+    if (this.replyText.trim() && this.replyingToComment) {
+      const reply: Comment = {
+        id: Date.now(),
+        user: 'Tú',
+        userAvatar: 'assets/ameth.png',
+        comment: this.replyText,
+        timestamp: 'Justo ahora',
+        likes: 0,
+        userHasLiked: false
+      };
+
+      if (!this.replyingToComment.replies) {
+        this.replyingToComment.replies = [];
+      }
+      
+      this.replyingToComment.replies.push(reply);
+      this.replyText = '';
+      this.replyingToComment = null;
+      this.showReplyEmojiPicker = false;
+    }
+  }
+
   toggleLike(comment: Comment) {
     comment.userHasLiked = !comment.userHasLiked;
     comment.likes += comment.userHasLiked ? 1 : -1;
+  }
+
+  toggleEmojiPicker() {
+    this.showEmojiPicker = !this.showEmojiPicker;
+    this.showStickerPicker = false;
+    this.showGifPicker = false;
+    
+    if (this.showEmojiPicker) {
+      this.setupEmojiPicker();
+    }
+  }
+
+  toggleReplyEmojiPicker(commentId: number) {
+    this.showReplyEmojiPicker = !this.showReplyEmojiPicker;
+    
+    if (this.showReplyEmojiPicker) {
+      this.setupReplyEmojiPicker(commentId);
+    }
+  }
+
+  toggleStickerPicker() {
+    this.showStickerPicker = !this.showStickerPicker;
+    this.showEmojiPicker = false;
+    this.showGifPicker = false;
+  }
+
+  toggleGifPicker() {
+    this.showGifPicker = !this.showGifPicker;
+    this.showEmojiPicker = false;
+    this.showStickerPicker = false;
+  }
+
+  closeAllPickers() {
+    this.showEmojiPicker = false;
+    this.showStickerPicker = false;
+    this.showGifPicker = false;
+    this.showReplyEmojiPicker = false;
   }
 
   get sortedComments() {
