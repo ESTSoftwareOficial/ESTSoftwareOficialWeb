@@ -1,1 +1,179 @@
-<p>checkout works!</p>
+<div class="min-h-screen bg-gradient-to-br from-[#0a0b0d] via-[#0f1419] to-[#0a0b0d] py-12 px-4">
+  <div class="max-w-6xl mx-auto">
+    <!-- Header -->
+    <div class="mb-8">
+      <button (click)="goBack()" 
+              class="text-gray-400 hover:text-white transition-colors flex items-center gap-2 mb-4">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+        </svg>
+        Volver
+      </button>
+      <h1 class="text-4xl font-bold text-white">Finalizar Compra</h1>
+      <p class="text-gray-400 mt-2">Completa tu información para acceder al curso</p>
+    </div>
+
+    <div class="grid lg:grid-cols-3 gap-8">
+      <!-- Formulario de Pago -->
+      <div class="lg:col-span-2">
+        <div class="bg-gradient-to-br from-[#0f1419] to-[#111215] rounded-2xl p-8 shadow-2xl">
+          
+          <!-- Success Message -->
+          <div *ngIf="paymentSuccess" class="mb-8 bg-green-500/10 border border-green-500/50 rounded-xl p-6 text-center">
+            <lucide-angular [img]="CheckCircle" class="w-16 h-16 text-green-500 mx-auto mb-4"></lucide-angular>
+            <h3 class="text-2xl font-bold text-green-500 mb-2">¡Pago Exitoso!</h3>
+            <p class="text-gray-300">Redirigiendo a tus cursos...</p>
+          </div>
+
+          <form *ngIf="!paymentSuccess" [formGroup]="paymentForm" (ngSubmit)="processPayment()">
+            <!-- Método de Pago -->
+            <!-- Método de Pago -->
+            <div class="mb-8">
+              <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                <lucide-angular [img]="CreditCard" class="w-5 h-5 text-[#22C55E]"></lucide-angular>
+                Método de Pago
+              </h3>
+              
+              <div class="grid grid-cols-3 gap-4">
+                <button *ngFor="let method of paymentMethods" type="button" (click)="onPaymentMethodChange(method.id)" [class]="getPaymentMethodClasses(method.id)">
+                  <div class="text-white font-semibold text-sm">{{ method.name }}</div>
+                </button>
+              </div>
+            </div>
+
+            <!-- Datos de Tarjeta -->
+            <div *ngIf="paymentForm.get('paymentMethod')?.value === 'card'" class="space-y-4 mb-8">
+              <div>
+                <label class="block text-sm font-medium text-gray-300 mb-2">Número de Tarjeta</label>
+                <input type="text" 
+                       formControlName="cardNumber"
+                       (input)="formatCardNumber($event)"
+                       maxlength="19"
+                       placeholder="1234 5678 9012 3456"
+                       class="w-full bg-[#1d1f23] border border-gray-700 rounded-xl px-4 py-3 text-white focus:border-[#22C55E] focus:outline-none transition-colors">
+                <span *ngIf="paymentForm.get('cardNumber')?.invalid && paymentForm.get('cardNumber')?.touched" 
+                      class="text-red-500 text-sm mt-1">Número de tarjeta inválido</span>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-300 mb-2">Nombre en la Tarjeta</label>
+                <input type="text" 
+                       formControlName="cardName"
+                       placeholder="JUAN PÉREZ"
+                       class="w-full bg-[#1d1f23] border border-gray-700 rounded-xl px-4 py-3 text-white focus:border-[#22C55E] focus:outline-none transition-colors">
+              </div>
+
+              <div class="grid grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-sm font-medium text-gray-300 mb-2">Fecha de Expiración</label>
+                  <input type="text" 
+                         formControlName="expiryDate"
+                         (input)="formatExpiryDate($event)"
+                         placeholder="MM/YY"
+                         maxlength="5"
+                         class="w-full bg-[#1d1f23] border border-gray-700 rounded-xl px-4 py-3 text-white focus:border-[#22C55E] focus:outline-none transition-colors">
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-300 mb-2">CVV</label>
+                  <input type="text" 
+                         formControlName="cvv"
+                         placeholder="123"
+                         maxlength="4"
+                         class="w-full bg-[#1d1f23] border border-gray-700 rounded-xl px-4 py-3 text-white focus:border-[#22C55E] focus:outline-none transition-colors">
+                </div>
+              </div>
+            </div>
+
+            <!-- Email -->
+            <div class="mb-8">
+              <label class="block text-sm font-medium text-gray-300 mb-2">Email de Confirmación</label>
+              <input type="email" 
+                     formControlName="email"
+                     placeholder="tu@email.com"
+                     class="w-full bg-[#1d1f23] border border-gray-700 rounded-xl px-4 py-3 text-white focus:border-[#22C55E] focus:outline-none transition-colors">
+            </div>
+
+            <!-- Términos -->
+            <div class="mb-8">
+              <label class="flex items-start gap-3 cursor-pointer">
+                <input type="checkbox" 
+                       formControlName="acceptTerms"
+                       class="mt-1 w-5 h-5 rounded border-gray-700 text-[#22C55E] focus:ring-[#22C55E]">
+                <span class="text-sm text-gray-300">
+                  Acepto los <a href="#" class="text-[#22C55E] hover:underline">términos y condiciones</a> 
+                  y la <a href="#" class="text-[#22C55E] hover:underline">política de privacidad</a>
+                </span>
+              </label>
+            </div>
+
+            <!-- Botón de Pago -->
+            <button type="submit" 
+                    [disabled]="isProcessing || paymentForm.invalid"
+                    class="w-full bg-gradient-to-r from-[#22C55E] to-[#16a34a] text-black font-bold py-4 rounded-xl hover:shadow-2xl hover:shadow-[#22C55E]/50 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2">
+              <lucide-angular [img]="Lock" class="w-5 h-5"></lucide-angular>
+              <span *ngIf="!isProcessing">Pagar ${{ checkoutData.price }} MXN</span>
+              <span *ngIf="isProcessing">Procesando...</span>
+            </button>
+
+            <p class="text-center text-sm text-gray-400 mt-4 flex items-center justify-center gap-2">
+              <lucide-angular [img]="Lock" class="w-4 h-4"></lucide-angular>
+              Pago seguro y encriptado
+            </p>
+          </form>
+        </div>
+      </div>
+
+      <!-- Resumen del Pedido -->
+      <div class="lg:col-span-1">
+        <div class="bg-gradient-to-br from-[#0f1419] to-[#111215] rounded-2xl p-6 shadow-2xl sticky top-24">
+          <h3 class="text-xl font-bold text-white mb-6">Resumen del Pedido</h3>
+          
+          <div class="space-y-4 mb-6">
+            <div>
+              <p class="text-sm text-gray-400">Curso</p>
+              <p class="text-white font-semibold">{{ checkoutData.courseName }}</p>
+            </div>
+
+            <div class="border-t border-gray-700 pt-4 space-y-3">
+              <div class="flex justify-between text-gray-300">
+                <span>Precio original</span>
+                <span class="line-through">${{ checkoutData.originalPrice }}</span>
+              </div>
+              
+              <div class="flex justify-between text-[#22C55E] font-semibold">
+                <span>Descuento (-{{ discountPercentage }}%)</span>
+                <span>-${{ discountAmount }}</span>
+              </div>
+
+              <div class="border-t border-gray-700 pt-3 flex justify-between text-white text-xl font-bold">
+                <span>Total</span>
+                <span>${{ checkoutData.price }} MXN</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-[#1d1f23]/50 rounded-xl p-4 space-y-2">
+            <div class="flex items-center gap-2 text-sm text-gray-300">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-[#22C55E]" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span>Acceso inmediato</span>
+            </div>
+            <div class="flex items-center gap-2 text-sm text-gray-300">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-[#22C55E]" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span>Certificado incluido</span>
+            </div>
+            <div class="flex items-center gap-2 text-sm text-gray-300">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-[#22C55E]" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span>Garantía de 30 días</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

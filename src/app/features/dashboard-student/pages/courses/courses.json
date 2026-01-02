@@ -1,0 +1,31 @@
+{
+  "id": 1,
+  "titulo": "Angular desde cero",
+  "videoUrl": "",
+  "description": "En esta lección aprenderás los conceptos básicos de Angular y cómo empezar a construir aplicaciones modernas con este poderoso framework.",
+  "likes": 271,
+  "instructor": {
+    "name": "Ameth Toledo",
+    "puesto": "FullStack Developer",
+    "redes": [
+      {
+        "name": "github",
+        "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg",
+        "url": "https://github.com/AmethToledo"
+      },
+      {
+        "name": "linkedin",
+        "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg",
+        "url": "https://linkedin.com/in/amethtoledo"
+      }
+    ]
+  },
+  "recursos": {
+    "recursosCount": 5,
+    "title": "Código del proyecto",
+    "description": "Comparte el link del repositorio.",
+    "url": "https://github.com",
+    "icon": ""
+  },
+  "comentariosCount": 200
+}

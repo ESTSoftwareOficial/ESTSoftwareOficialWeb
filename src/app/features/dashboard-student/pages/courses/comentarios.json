@@ -1,0 +1,31 @@
+{
+  "total": 200,
+  "page": 1,
+  "limit": 10,
+  "comentarios": [
+    {
+      "id": 1,
+      "usuario": {
+        "id": 10,
+        "nombre": "Juan Pérez",
+        "foto": "https://miapp.com/uploads/juan.png"
+      },
+      "mensaje": "Excelente explicación, muy claro y conciso.",
+      "likes": 5,
+      "fecha": "2026-01-01T18:00:00",
+      "respuestasCount": 1
+    },
+    {
+      "id": 2,
+      "usuario": {
+        "id": 11,
+        "nombre": "María López",
+        "foto": "https://miapp.com/uploads/maria.png"
+      },
+      "mensaje": "Muy buen curso, recomendado.",
+      "likes": 3,
+      "fecha": "2026-01-01T19:00:00",
+      "respuestasCount": 0
+    }
+  ]
+}
