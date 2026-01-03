@@ -4,16 +4,14 @@
       <lucide-angular [img]="MessageSquare" class="w-6 h-6 text-[#22C55E]"></lucide-angular>
       <h2 class="text-xl font-bold text-white">{{ comments.length }} Comentarios</h2>
     </div>
-    
+
     <div class="flex gap-2 mb-4">
-      <button 
-        (click)="sortBy = 'recent'"
+      <button (click)="sortBy = 'recent'"
         [ngClass]="sortBy === 'recent' ? 'bg-[#22C55E] text-black' : 'bg-[#1d1d1d] text-gray-400'"
         class="px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-300">
         Recientes
       </button>
-      <button 
-        (click)="sortBy = 'popular'"
+      <button (click)="sortBy = 'popular'"
         [ngClass]="sortBy === 'popular' ? 'bg-[#22C55E] text-black' : 'bg-[#1d1d1d] text-gray-400'"
         class="px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-300">
         Populares
@@ -25,54 +23,48 @@
         <div class="w-10 h-10 rounded-full overflow-hidden bg-[#22C55E] shrink-0">
           <img src="assets/ameth.png" alt="Tu avatar" class="w-full h-full object-cover">
         </div>
-        <div class="flex-1 bg-[#1d1d1d] rounded-xl border border-neutral-800 focus-within:border-[#22C55E] transition-colors">
-          <textarea 
-            #commentTextarea
-            [(ngModel)]="newComment"
-            (ngModelChange)="onCommentChange()"
-            placeholder="Escribe un comentario..."
-            rows="1"
+        <div
+          class="flex-1 bg-[#1d1d1d] rounded-xl border border-neutral-800 focus-within:border-[#22C55E] transition-colors">
+          <textarea #commentTextarea [(ngModel)]="newComment" (ngModelChange)="onCommentChange()"
+            placeholder="Escribe un comentario..." rows="1"
             class="w-full bg-transparent text-white px-4 py-3 focus:outline-none resize-none placeholder:text-gray-500 text-sm"></textarea>
-          
+
           <div class="flex items-center justify-between px-3 pb-2">
             <div class="flex gap-1">
-              <button 
-                type="button"
-                (click)="toggleEmojiPicker(); $event.stopPropagation()"
+              <button type="button" (click)="toggleEmojiPicker(); $event.stopPropagation()"
                 class="p-1.5 hover:bg-[#2d2d2d] rounded-lg transition-colors group relative">
                 <lucide-angular [img]="Smile" class="w-5 h-5 text-gray-400 group-hover:text-[#22C55E]"></lucide-angular>
-                <span class="absolute bottom-full mb-1 px-2 py-1 bg-gray-900 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+                <span
+                  class="absolute bottom-full mb-1 px-2 py-1 bg-gray-900 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
                   Comentar con emoji
                 </span>
               </button>
-              
-              <button 
-                type="button"
-                (click)="toggleStickerPicker(); $event.stopPropagation()"
+
+              <button type="button" (click)="toggleStickerPicker(); $event.stopPropagation()"
                 class="p-1.5 hover:bg-[#2d2d2d] rounded-lg transition-colors group relative">
-                <lucide-angular [img]="Sticker" class="w-5 h-5 text-gray-400 group-hover:text-[#22C55E]"></lucide-angular>
-                <span class="absolute bottom-full mb-1 px-2 py-1 bg-gray-900 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+                <lucide-angular [img]="Sticker"
+                  class="w-5 h-5 text-gray-400 group-hover:text-[#22C55E]"></lucide-angular>
+                <span
+                  class="absolute bottom-full mb-1 px-2 py-1 bg-gray-900 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
                   Comentar con sticker
                 </span>
               </button>
 
-              <button 
-                type="button"
-                (click)="toggleGifPicker(); $event.stopPropagation()"
+              <button type="button" (click)="toggleGifPicker(); $event.stopPropagation()"
                 class="p-1.5 hover:bg-[#2d2d2d] rounded-lg transition-colors group relative">
                 <lucide-angular [img]="Film" class="w-5 h-5 text-gray-400 group-hover:text-[#22C55E]"></lucide-angular>
-                <span class="absolute bottom-full mb-1 px-2 py-1 bg-gray-900 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+                <span
+                  class="absolute bottom-full mb-1 px-2 py-1 bg-gray-900 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
                   Comentar con GIF
                 </span>
               </button>
             </div>
 
-            <button 
-              (click)="addComment()"
-              [disabled]="!newComment.trim()"
+            <button (click)="addComment()" [disabled]="!newComment.trim()"
               class="p-1.5 hover:bg-[#22C55E] hover:text-black rounded-lg transition-all disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-transparent group relative">
               <lucide-angular [img]="Send" class="w-5 h-5 text-[#22C55E]"></lucide-angular>
-              <span class="absolute bottom-full mb-1 px-2 py-1 bg-gray-900 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+              <span
+                class="absolute bottom-full mb-1 px-2 py-1 bg-gray-900 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
                 Enviar comentario
               </span>
             </button>
@@ -86,7 +78,8 @@
         </div>
       </div>
 
-      <div *ngIf="showStickerPicker" class="absolute top-full left-0 mt-2 z-50 bg-[#1d1d1d] border border-neutral-800 rounded-xl shadow-2xl p-4">
+      <div *ngIf="showStickerPicker"
+        class="absolute top-full left-0 mt-2 z-50 bg-[#1d1d1d] border border-neutral-800 rounded-xl shadow-2xl p-4">
         <div class="w-64 h-48 flex items-center justify-center text-gray-400 text-sm">
           <div class="text-center">
             <lucide-angular [img]="Sticker" class="w-12 h-12 mx-auto mb-2 text-[#22C55E]"></lucide-angular>
@@ -96,7 +89,8 @@
         </div>
       </div>
 
-      <div *ngIf="showGifPicker" class="absolute top-full left-0 mt-2 z-50 bg-[#1d1d1d] border border-neutral-800 rounded-xl shadow-2xl p-4">
+      <div *ngIf="showGifPicker"
+        class="absolute top-full left-0 mt-2 z-50 bg-[#1d1d1d] border border-neutral-800 rounded-xl shadow-2xl p-4">
         <div class="w-64 h-48 flex items-center justify-center text-gray-400 text-sm">
           <div class="text-center">
             <lucide-angular [img]="Film" class="w-12 h-12 mx-auto mb-2 text-[#22C55E]"></lucide-angular>
@@ -117,7 +111,7 @@
           <div class="w-9 h-9 rounded-full overflow-hidden bg-[#22C55E] shrink-0">
             <img [src]="comment.userAvatar" [alt]="comment.user" class="w-full h-full object-cover">
           </div>
-          
+
           <div class="flex-1">
             <div class="bg-[#1d1d1d] rounded-lg p-3">
               <div class="flex items-center justify-between mb-1.5">
@@ -126,29 +120,73 @@
               </div>
               <p class="text-sm text-gray-300 leading-relaxed">{{ comment.comment }}</p>
             </div>
-            
+
             <div class="flex items-center gap-4 mt-2 ml-3">
-              <button 
-                (click)="toggleLike(comment)"
-                class="flex items-center gap-1 text-sm transition-colors"
+              <button (click)="toggleLike(comment)" class="flex items-center gap-1 text-sm transition-colors"
                 [ngClass]="comment.userHasLiked ? 'text-red-400' : 'text-gray-400 hover:text-white'">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" [attr.fill]="comment.userHasLiked ? 'currentColor' : 'none'" stroke="currentColor" stroke-width="2" class="w-4 h-4">
-                  <path d="M7.493 18.75c-.425 0-.82-.236-.975-.632A7.48 7.48 0 016 15.375c0-1.75.599-3.358 1.602-4.634.151-.192.373-.309.6-.397.473-.183.89-.514 1.212-.924a9.042 9.042 0 012.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 00.322-1.672V3a.75.75 0 01.75-.75 2.25 2.25 0 012.25 2.25c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 01-2.649 7.521c-.388.482-.987.729-1.605.729H14.23c-.483 0-.964-.078-1.423-.23l-3.114-1.04a4.501 4.501 0 00-1.423-.23h-.777zM2.331 10.977a11.969 11.969 0 00-.831 4.398 12 12 0 00.52 3.507c.26.85 1.084 1.368 1.973 1.368H4.9c.445 0 .72-.498.523-.898a8.963 8.963 0 01-.924-3.977c0-1.708.476-3.305 1.302-4.666.245-.403-.028-.959-.5-.959H4.25c-.832 0-1.612.453-1.918 1.227z" />
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                  [attr.fill]="comment.userHasLiked ? 'currentColor' : 'none'" stroke="currentColor" stroke-width="2"
+                  class="w-4 h-4">
+                  <path
+                    d="M7.493 18.75c-.425 0-.82-.236-.975-.632A7.48 7.48 0 016 15.375c0-1.75.599-3.358 1.602-4.634.151-.192.373-.309.6-.397.473-.183.89-.514 1.212-.924a9.042 9.042 0 012.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 00.322-1.672V3a.75.75 0 01.75-.75 2.25 2.25 0 012.25 2.25c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 01-2.649 7.521c-.388.482-.987.729-1.605.729H14.23c-.483 0-.964-.078-1.423-.23l-3.114-1.04a4.501 4.501 0 00-1.423-.23h-.777zM2.331 10.977a11.969 11.969 0 00-.831 4.398 12 12 0 00.52 3.507c.26.85 1.084 1.368 1.973 1.368H4.9c.445 0 .72-.498.523-.898a8.963 8.963 0 01-.924-3.977c0-1.708.476-3.305 1.302-4.666.245-.403-.028-.959-.5-.959H4.25c-.832 0-1.612.453-1.918 1.227z" />
                 </svg>
                 <span class="font-medium">{{ comment.likes }}</span>
               </button>
-              
-              <button class="text-xs text-gray-400 hover:text-white font-medium transition-colors">
+
+              <button (click)="startReply(comment)"
+                class="text-xs text-gray-400 hover:text-white font-medium transition-colors">
                 Responder
               </button>
             </div>
 
+            <!-- Reply Form -->
+            <div *ngIf="replyingToComment?.id === comment.id" class="mt-3 ml-3">
+              <div class="flex gap-2 items-start">
+                <div class="w-8 h-8 rounded-full overflow-hidden bg-[#22C55E] shrink-0">
+                  <img src="assets/ameth.png" alt="Tu avatar" class="w-full h-full object-cover">
+                </div>
+                <div
+                  class="flex-1 bg-[#1d1d1d] rounded-xl border border-neutral-800 focus-within:border-[#22C55E] transition-colors relative">
+                  <textarea [id]="'reply-textarea-' + comment.id" [(ngModel)]="replyText"
+                    placeholder="Escribe una respuesta..." rows="1"
+                    class="w-full bg-transparent text-white px-3 py-2 focus:outline-none resize-none placeholder:text-gray-500 text-sm"></textarea>
+
+                  <div class="flex items-center justify-between px-2 pb-2">
+                    <button type="button" (click)="toggleReplyEmojiPicker(comment.id); $event.stopPropagation()"
+                      class="p-1 hover:bg-[#2d2d2d] rounded-lg transition-colors">
+                      <lucide-angular [img]="Smile" class="w-4 h-4 text-gray-400 hover:text-[#22C55E]"></lucide-angular>
+                    </button>
+
+                    <div class="flex gap-1 items-center">
+                      <button (click)="cancelReply()"
+                        class="p-1 text-xs text-gray-400 hover:text-white transition-colors">
+                        <lucide-angular [img]="X" class="w-4 h-4"></lucide-angular>
+                      </button>
+                      <button (click)="addReply()" [disabled]="!replyText.trim()"
+                        class="p-1 hover:bg-[#22C55E] hover:text-black rounded-lg transition-all disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-transparent group relative">
+                        <lucide-angular [img]="Send" class="w-4 h-4 text-[#22C55E]"></lucide-angular>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Reply Emoji Picker -->
+                  <div *ngIf="showReplyEmojiPicker" class="absolute top-full left-0 mt-2 z-50"
+                    (click)="$event.stopPropagation()">
+                    <div class="bg-[#1d1d1d] border border-neutral-800 rounded-xl shadow-2xl overflow-hidden">
+                      <emoji-picker [class]="'reply-emoji-picker-' + comment.id"></emoji-picker>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Replies -->
             <div *ngIf="comment.replies && comment.replies.length > 0" class="ml-6 mt-3 space-y-3">
               <div *ngFor="let reply of comment.replies" class="flex gap-2">
                 <div class="w-8 h-8 rounded-full overflow-hidden bg-[#22C55E] shrink-0">
                   <img [src]="reply.userAvatar" [alt]="reply.user" class="w-full h-full object-cover">
                 </div>
-                
+
                 <div class="flex-1">
                   <div class="bg-[#0a0a0c] rounded-lg p-3">
                     <div class="flex items-center justify-between mb-1">
@@ -157,14 +195,15 @@
                     </div>
                     <p class="text-sm text-gray-300 leading-relaxed">{{ reply.comment }}</p>
                   </div>
-                  
+
                   <div class="flex items-center gap-4 mt-1.5 ml-2">
-                    <button 
-                      (click)="toggleLike(reply)"
-                      class="flex items-center gap-1 text-xs transition-colors"
+                    <button (click)="toggleLike(reply)" class="flex items-center gap-1 text-xs transition-colors"
                       [ngClass]="reply.userHasLiked ? 'text-red-400' : 'text-gray-400 hover:text-white'">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" [attr.fill]="reply.userHasLiked ? 'currentColor' : 'none'" stroke="currentColor" stroke-width="2" class="w-3.5 h-3.5">
-                        <path d="M7.493 18.75c-.425 0-.82-.236-.975-.632A7.48 7.48 0 016 15.375c0-1.75.599-3.358 1.602-4.634.151-.192.373-.309.6-.397.473-.183.89-.514 1.212-.924a9.042 9.042 0 012.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 00.322-1.672V3a.75.75 0 01.75-.75 2.25 2.25 0 012.25 2.25c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 01-2.649 7.521c-.388.482-.987.729-1.605.729H14.23c-.483 0-.964-.078-1.423-.23l-3.114-1.04a4.501 4.501 0 00-1.423-.23h-.777zM2.331 10.977a11.969 11.969 0 00-.831 4.398 12 12 0 00.52 3.507c.26.85 1.084 1.368 1.973 1.368H4.9c.445 0 .72-.498.523-.898a8.963 8.963 0 01-.924-3.977c0-1.708.476-3.305 1.302-4.666.245-.403-.028-.959-.5-.959H4.25c-.832 0-1.612.453-1.918 1.227z" />
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                        [attr.fill]="reply.userHasLiked ? 'currentColor' : 'none'" stroke="currentColor"
+                        stroke-width="2" class="w-3.5 h-3.5">
+                        <path
+                          d="M7.493 18.75c-.425 0-.82-.236-.975-.632A7.48 7.48 0 016 15.375c0-1.75.599-3.358 1.602-4.634.151-.192.373-.309.6-.397.473-.183.89-.514 1.212-.924a9.042 9.042 0 012.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 00.322-1.672V3a.75.75 0 01.75-.75 2.25 2.25 0 012.25 2.25c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 01-2.649 7.521c-.388.482-.987.729-1.605.729H14.23c-.483 0-.964-.078-1.423-.23l-3.114-1.04a4.501 4.501 0 00-1.423-.23h-.777zM2.331 10.977a11.969 11.969 0 00-.831 4.398 12 12 0 00.52 3.507c.26.85 1.084 1.368 1.973 1.368H4.9c.445 0 .72-.498.523-.898a8.963 8.963 0 01-.924-3.977c0-1.708.476-3.305 1.302-4.666.245-.403-.028-.959-.5-.959H4.25c-.832 0-1.612.453-1.918 1.227z" />
                       </svg>
                       <span class="font-medium">{{ reply.likes }}</span>
                     </button>

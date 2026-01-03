@@ -1,0 +1,87 @@
+<div class="space-y-6">
+    <app-navbar 
+        pageTitle="Inicio" 
+        pageSubtitle="Panel de instructor">
+    </app-navbar>
+
+    <div class="bg-gradient-to-r from-neutral-900 to-neutral-800 rounded-2xl p-6 border border-neutral-800">
+        <div class="flex items-center gap-4">
+            <div class="w-20 h-20 rounded-full overflow-hidden shrink-0 ring-4 ring-green-500/20" style="background-color: #22C55E;">
+                <img src="assets/ameth.png" alt="" class="w-full h-full object-cover">
+            </div>
+            <div class="flex-1">
+                <h1 class="text-3xl font-bold text-white">Hola de nuevo, {{ userName }}</h1>
+                <p class="text-gray-400 mt-1">Bienvenido a tu panel de instructor</p>
+            </div>
+            <button class="px-6 py-3 bg-green-500 hover:bg-green-600 text-white rounded-lg font-medium transition-colors">
+                Crear nuevo curso
+            </button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+            <div class="bg-black/30 rounded-lg p-4">
+                <p class="text-gray-400 text-sm">Cursos publicados</p>
+                <p class="text-2xl font-bold text-white mt-1">12</p>
+            </div>
+            <div class="bg-black/30 rounded-lg p-4">
+                <p class="text-gray-400 text-sm">Total estudiantes</p>
+                <p class="text-2xl font-bold text-white mt-1">1,284</p>
+            </div>
+            <div class="bg-black/30 rounded-lg p-4">
+                <p class="text-gray-400 text-sm">Calificación promedio</p>
+                <p class="text-2xl font-bold text-white mt-1">4.8 ⭐</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-8">
+        <div class="flex items-center justify-between mb-6">
+            <h2 class="text-2xl font-bold text-white">Mis Cursos</h2>
+            <div class="flex items-center gap-2">
+                <button class="px-4 py-2 bg-neutral-800 hover:bg-neutral-700 text-white rounded-lg transition-colors text-sm">
+                    Todos
+                </button>
+                <button class="px-4 py-2 bg-neutral-900 hover:bg-neutral-800 text-gray-400 rounded-lg transition-colors text-sm">
+                    Publicados
+                </button>
+                <button class="px-4 py-2 bg-neutral-900 hover:bg-neutral-800 text-gray-400 rounded-lg transition-colors text-sm">
+                    Borradores
+                </button>
+            </div>
+        </div>
+
+        <div class="flex flex-wrap gap-4">
+            <app-course-card
+                imgSrc="https://res.cloudinary.com/dzndokn0t/image/upload/v1766792659/courses/y5mc6vcusqcnoydltg59.webp"
+                nameCourse="Curso Completo de Angular desde Cero"
+                tecnologyIcon="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg"
+                teacher="Ameth Toledo" 
+                averageRating="4.8">
+            </app-course-card>
+
+            <app-course-card
+                imgSrc="https://res.cloudinary.com/dzndokn0t/image/upload/v1766792659/courses/y5mc6vcusqcnoydltg59.webp"
+                nameCourse="React Avanzado con TypeScript"
+                tecnologyIcon="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"
+                teacher="Ameth Toledo" 
+                averageRating="4.9">
+            </app-course-card>
+
+            <app-course-card
+                imgSrc="https://res.cloudinary.com/dzndokn0t/image/upload/v1766792659/courses/y5mc6vcusqcnoydltg59.webp"
+                nameCourse="Node.js y Express desde Cero"
+                tecnologyIcon="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg"
+                teacher="Ameth Toledo" 
+                averageRating="4.7">
+            </app-course-card>
+
+            <app-course-card
+                imgSrc="https://res.cloudinary.com/dzndokn0t/image/upload/v1766792659/courses/y5mc6vcusqcnoydltg59.webp"
+                nameCourse="Vue.js 3 Composition API"
+                tecnologyIcon="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg"
+                teacher="Ameth Toledo" 
+                averageRating="4.6">
+            </app-course-card>
+        </div>
+    </div>
+</div>

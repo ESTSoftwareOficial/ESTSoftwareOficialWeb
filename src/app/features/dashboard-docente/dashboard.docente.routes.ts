@@ -1,14 +1,14 @@
 import { Routes } from '@angular/router';
 import { DashboardLayoutComponent } from './pages/dashboard-layout/dashboard-layout.component';
 
-export const DASHBOARD_ROUTES: Routes = [
+export const DASHBOARD_DOCENTE_ROUTES: Routes = [
   {
     path: '',
     component: DashboardLayoutComponent,
     children: [
       {
         path: '',
-        redirectTo: 'overview',
+        redirectTo: 'docent',
         pathMatch: 'full'
       },
       {
@@ -16,6 +16,7 @@ export const DASHBOARD_ROUTES: Routes = [
         title: 'Inicio',
         loadComponent: () => import('./pages/overview/overview.component').then(m => m.OverviewComponent)
       },
+      /*
       {
         path: 'my-courses',
         title: 'Cursos',
@@ -43,7 +44,7 @@ export const DASHBOARD_ROUTES: Routes = [
       {
         path: 'courses/:courseName/lesson/:lessonId',
         loadComponent: () => import('./pages/lesson/lesson.component').then(m => m.LessonComponent)
-      }
+      }*/
     ]
   }
-];
+]

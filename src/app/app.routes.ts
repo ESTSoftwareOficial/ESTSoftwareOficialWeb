@@ -7,5 +7,6 @@ export const routes: Routes = [
     { path: 'auth', loadChildren: () => import('./features/auth/auth.routes').then(m => m.AUTH_ROUTES) },
     { path: 'courses', title: 'EST Software: Cursos', loadChildren: () => import('./features/courses/courses.routes').then(m => m.COURSES_ROUTES) },
     { path: 'dashboard', loadChildren: () => import('./features/dashboard-student/dashboard.routes').then(m => m.DASHBOARD_ROUTES) },
-    { path: 'checkout', loadChildren: () => import('./features/payments/payments.routes').then(m => m.PAYMENT_ROUTES) }
+    { path: 'checkout', loadChildren: () => import('./features/payments/payments.routes').then(m => m.PAYMENT_ROUTES) },
+    { path: 'dashboard/docent', loadChildren: () => import('./features/dashboard-docente/dashboard.docente.routes').then(m => m.DASHBOARD_DOCENTE_ROUTES) }
 ];

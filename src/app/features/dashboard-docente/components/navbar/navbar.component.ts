@@ -1,19 +1,21 @@
 import { CommonModule } from '@angular/common';
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { LucideAngularModule, Bell, Search, ChevronDown, User, CreditCard, Settings, LogOut } from 'lucide-angular';
 import { NotifyModalComponent } from '../notify-modal/notify-modal.component';
-import { ExpandableCardsComponent } from '../../../../shared/components/expandable-cards/expandable-cards.component';
 import { CourseCard } from '../../../../shared/components/expandable-cards/expandable-cards.component';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [LucideAngularModule, CommonModule, NotifyModalComponent, FormsModule, ExpandableCardsComponent],
+  imports: [LucideAngularModule, CommonModule, NotifyModalComponent, FormsModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
+  @Input() pageTitle: string = 'Dashboard';
+  @Input() pageSubtitle?: string;
+
   readonly Bell = Bell;
   readonly Search = Search;
   readonly ChevronDown = ChevronDown;

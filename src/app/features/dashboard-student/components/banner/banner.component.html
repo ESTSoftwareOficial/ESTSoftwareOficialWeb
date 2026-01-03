@@ -1,16 +1,42 @@
-<div class="relative w-full h-[250px]">
-  <img src="assets/banner.png" alt="" class="w-full h-full object-cover">  
-  <div class="absolute inset-0 flex flex-col items-start justify-center px-10 md:px-20">
-    <img src="assets/logo.svg" alt="" class="w-24 h-24 md:w-32 md:h-32 mb-3">
-    <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4">ESTSoftware</h1>
-    <p class="text-2xl md:text-3xl text-white font-semibold mb-2">Aprende Python desde cero</p>
-    <p class="text-lg md:text-xl text-gray-200 mb-6">con el curso <span class="font-semibold text-white">{{ namecurso }}</span></p>
-    
-   <!-- <button class="flex items-center gap-3 bg-black hover:bg-gray-900 text-white font-semibold px-8 py-4 rounded-lg transition-all duration-300 hover:scale-105 shadow-xl">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-      </svg>
-      Comenzar Ahora
-    </button>-->
+<div class="relative w-full">
+  <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
+    <div *ngFor="let slide of slides; let i = index" 
+         class="absolute w-full h-full transition-opacity duration-700 ease-in-out"
+         [class.opacity-100]="currentSlide === i"
+         [class.opacity-0]="currentSlide !== i">
+      <img [src]="slide" 
+           class="absolute block w-full h-full object-cover" 
+           [alt]="'Slide ' + (i + 1)">
+    </div>
   </div>
+
+  <div class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3">
+    <button *ngFor="let slide of slides; let i = index"
+            type="button" 
+            (click)="goToSlide(i)"
+            class="w-3 h-3 rounded-full transition-all"
+            [ngClass]="currentSlide === i ? 'bg-white' : 'bg-white/50'"
+            [attr.aria-label]="'Slide ' + (i + 1)">
+    </button>
+  </div>
+
+  <button type="button" 
+          (click)="prevSlide()"
+          class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none">
+    <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 group-hover:bg-white/50 transition-colors">
+      <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m15 19-7-7 7-7"/>
+      </svg>
+    </span>
+  </button>
+
+  <button type="button" 
+          (click)="nextSlide()"
+          class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none">
+    <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 group-hover:bg-white/50 transition-colors">
+      <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 5 7 7-7 7"/>
+      </svg>
+    </span>
+  </button>
 </div>
