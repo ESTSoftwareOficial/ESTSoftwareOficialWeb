@@ -14,6 +14,7 @@ export class DescriptionLessonComponent {
   @Input() instructor: string = 'Ameth Toledo';
   @Input() instructorRole: string = 'FullStack Jr Developer';
   @Input() instructorAvatar: string = 'assets/ameth.png';
+  @Input() portfolioUrl: string = 'https://www.amethdev.pro';
 
   likesCount = 0;
   userHasLiked = false;
