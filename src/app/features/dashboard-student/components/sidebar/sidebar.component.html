@@ -122,29 +122,6 @@
     </div>
 
     <div class="px-3 space-y-1">
-      <a 
-        href="#" 
-        class="flex items-center gap-3 group/sidebar py-3 rounded-xl hover:bg-neutral-900 transition-all"
-        [ngClass]="{
-          'justify-center': !isOpen(),
-          'justify-start px-4': isOpen()
-        }">
-        <div class="h-8 w-8 shrink-0 rounded-full overflow-hidden" style="background-color: #22c55e;">
-          <img 
-            src="/assets/ameth.png" 
-            class="h-full w-full object-cover" 
-            alt="Avatar Ameth">
-        </div>
-        <span 
-          class="text-neutral-200 text-sm font-medium group-hover/sidebar:translate-x-1 transition-all duration-150 whitespace-pre overflow-hidden"
-          [ngClass]="{
-            'opacity-0 w-0': !isOpen(),
-            'opacity-100 w-auto': isOpen()
-          }">
-          Ameth Toledo
-        </span>
-      </a>
-
       <button 
         class="flex items-center gap-3 group/sidebar py-3 rounded-xl hover:bg-neutral-900 transition-all w-full"
         [ngClass]="{
