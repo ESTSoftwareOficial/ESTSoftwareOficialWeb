@@ -127,8 +127,8 @@ export class CheckoutComponent implements OnInit {
   }
 
   formatCardNumber(event: any): void {
-    let value = event.target.value.replace(/\s/g, '');
-    let formattedValue = value.match(/.{1,4}/g)?.join(' ') || value;
+    const value = event.target.value.replace(/\s/g, '');
+    const formattedValue = value.match(/.{1,4}/g)?.join(' ') || value;
     this.paymentForm.patchValue({ cardNumber: formattedValue.replace(/\s/g, '') });
     event.target.value = formattedValue;
   }

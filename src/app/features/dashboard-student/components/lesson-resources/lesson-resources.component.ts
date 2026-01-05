@@ -17,7 +17,7 @@ interface Resource {
   styleUrl: './lesson-resources.component.css'
 })
 export class LessonResourcesComponent {
-  @Input() lessonId: number = 0;
+  @Input() lessonId = 0;
 
   resources: Resource[] = [
     {

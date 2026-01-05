@@ -13,7 +13,7 @@ import { CourseCard } from '../../../../shared/components/expandable-cards/expan
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
-  @Input() pageTitle: string = 'Dashboard';
+  @Input() pageTitle = 'Dashboard';
   @Input() pageSubtitle?: string;
 
   readonly Bell = Bell;

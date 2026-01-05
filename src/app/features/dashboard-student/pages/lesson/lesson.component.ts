@@ -41,8 +41,8 @@ interface Lesson {
   templateUrl: './lesson.component.html',
   styleUrl: './lesson.component.css'
 })
-export class LessonComponent {
-  courseName: string = '';
+export class LessonComponent implements OnInit {
+  courseName = '';
   
   currentLesson: Lesson = {
     id: 1,

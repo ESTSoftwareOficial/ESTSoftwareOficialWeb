@@ -11,9 +11,9 @@ import { LucideAngularModule, CreditCard } from 'lucide-angular';
   styleUrl: './course-pricing.component.css'
 })
 export class CoursePricingComponent {
-  @Input() originalPrice: number = 0;
-  @Input() discountedPrice: number = 0;
-  @Input() monthlyPrice: number = 0;
+  @Input() originalPrice = 0;
+  @Input() discountedPrice = 0;
+  @Input() monthlyPrice = 0;
   @Input() courseId!: string;
   @Input() courseName!: string;
 

@@ -9,11 +9,11 @@ import { Component, Input } from '@angular/core';
   styleUrl: './course-header.component.css'
 })
 export class CourseHeaderComponent {
-  @Input() courseImage: string = '';
-  @Input() courseName: string = '';
-  @Input() courseTitle: string = '';
-  @Input() courseDescription: string = '';
-  @Input() publishDate: string = '';
-  @Input() courseLevel: string = '';
-  @Input() totalModules: number = 0;
+  @Input() courseImage = '';
+  @Input() courseName = '';
+  @Input() courseTitle = '';
+  @Input() courseDescription = '';
+  @Input() publishDate = '';
+  @Input() courseLevel = '';
+  @Input() totalModules = 0;
 }

@@ -12,5 +12,5 @@ import { CourseCardComponent } from "../../components/course-card/course-card.co
   styleUrl: './overview.component.css'
 })
 export class OverviewComponent {
-  userName: string = 'Ameth Toledo'
+  userName = 'Ameth Toledo'
 }

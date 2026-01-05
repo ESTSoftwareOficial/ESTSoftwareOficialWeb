@@ -15,17 +15,17 @@ import { CoursePricingComponent } from '../../components/course-pricing/course-p
   styleUrl: './course-detail.component.css'
 })
 export class CourseDetailComponent implements OnInit {
-  courseName: string = '';
-  courseTitle: string = 'Curso Completo de Angular desde Cero';
-  courseImage: string = 'https://res.cloudinary.com/dzndokn0t/image/upload/v1766792659/courses/y5mc6vcusqcnoydltg59.webp';
-  courseDescription: string = 'Aprende Angular desde los fundamentos hasta conceptos avanzados. Construye aplicaciones web modernas y escalables con el framework más popular de Google.';
-  publishDate: string = '15 de Enero, 2025';
-  courseLevel: string = 'Principiante';
-  totalModules: number = 12;
+  courseName = '';
+  courseTitle = 'Curso Completo de Angular desde Cero';
+  courseImage = 'https://res.cloudinary.com/dzndokn0t/image/upload/v1766792659/courses/y5mc6vcusqcnoydltg59.webp';
+  courseDescription = 'Aprende Angular desde los fundamentos hasta conceptos avanzados. Construye aplicaciones web modernas y escalables con el framework más popular de Google.';
+  publishDate = '15 de Enero, 2025';
+  courseLevel = 'Principiante';
+  totalModules = 12;
 
-  originalPrice: number = 213;
-  discountedPrice: number = 167;
-  monthlyPrice: number = 369;
+  originalPrice = 213;
+  discountedPrice = 167;
+  monthlyPrice = 369;
 
   modules: Module[] = [
     {

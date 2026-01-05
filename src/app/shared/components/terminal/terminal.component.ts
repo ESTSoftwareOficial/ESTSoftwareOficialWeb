@@ -18,9 +18,9 @@ interface TerminalLine {
 })
 export class TerminalComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() lines: TerminalLine[] = [];
-  @Input() sequence: boolean = true;
-  @Input() startOnView: boolean = true;
-  @Input() className: string = '';
+  @Input() sequence = true;
+  @Input() startOnView = true;
+  @Input() className = '';
 
   @ViewChild('terminalContainer') terminalContainer!: ElementRef;
 

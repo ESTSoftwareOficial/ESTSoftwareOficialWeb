@@ -22,7 +22,7 @@ interface Course {
 export class OverviewComponent implements AfterViewInit, OnDestroy {
   @ViewChildren('glowContainer') glowContainers!: QueryList<ElementRef<HTMLDivElement>>;
 
-  userName: string = 'Ameth Toledo';
+  userName = 'Ameth Toledo';
   readonly Plus = Plus;
   readonly BookOpen = BookOpen;
   readonly Star = Star;
@@ -31,7 +31,7 @@ export class OverviewComponent implements AfterViewInit, OnDestroy {
   readonly Users = Users;
 
   private lastPosition = { x: 0, y: 0 };
-  private animationFrameId: number = 0;
+  private animationFrameId = 0;
 
   courses: Course[] = [
     {
@@ -173,7 +173,7 @@ export class OverviewComponent implements AfterViewInit, OnDestroy {
 
         if (!isActive) return;
 
-        let targetAngle = (180 * Math.atan2(mouseY - center[1], mouseX - center[0])) / Math.PI + 90;
+        const targetAngle = (180 * Math.atan2(mouseY - center[1], mouseX - center[0])) / Math.PI + 90;
         element.style.setProperty('--start', String(targetAngle));
       });
     });

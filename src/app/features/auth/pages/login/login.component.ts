@@ -18,19 +18,19 @@ export class LoginComponent {
   readonly Eye = Eye;
   readonly EyeOff = EyeOff;
   
-  isHovered: boolean = false;
-  showPassword: boolean = false;
+  isHovered = false;
+  showPassword = false;
   
-  email: string = '';
-  password: string = '';
-  rememberMe: boolean = false;
+  email = '';
+  password = '';
+  rememberMe = false;
   
-  isLoading: boolean = false;
+  isLoading = false;
   
-  showModal: boolean = false;
+  showModal = false;
   modalType: ModalType = 'info';
-  modalTitle: string = '';
-  modalMessage: string = '';
+  modalTitle = '';
+  modalMessage = '';
 
   constructor(
     private router: Router,

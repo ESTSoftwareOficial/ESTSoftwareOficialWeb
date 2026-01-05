@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LucideAngularModule, Check, X, AlertTriangle, Info } from 'lucide-angular';
 import gsap from 'gsap';
@@ -12,19 +12,19 @@ export type ModalType = 'success' | 'error' | 'warning' | 'info';
   templateUrl: './alert.component.html',
   styleUrl: './alert.component.css'
 })
-export class AlertComponent implements OnInit {
+export class AlertComponent implements OnInit, OnChanges {
   readonly Check = Check;
   readonly X = X;
   readonly AlertTriangle = AlertTriangle;
   readonly Info = Info;
 
-  @Input() isOpen: boolean = false;
+  @Input() isOpen = false;
   @Input() type: ModalType = 'info';
-  @Input() title: string = '';
-  @Input() message: string = '';
-  @Input() confirmText: string = 'Aceptar';
-  @Input() cancelText: string = 'Cancelar';
-  @Input() showCancel: boolean = false;
+  @Input() title = '';
+  @Input() message = '';
+  @Input() confirmText = 'Aceptar';
+  @Input() cancelText = 'Cancelar';
+  @Input() showCancel = false;
   
   @Output() onConfirm = new EventEmitter<void>();
   @Output() onCancel = new EventEmitter<void>();

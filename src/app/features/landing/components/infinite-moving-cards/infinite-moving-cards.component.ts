@@ -19,8 +19,8 @@ export class InfiniteMovingCardsComponent implements OnInit, AfterViewInit {
   @Input() items: TestimonialItem[] = [];
   @Input() direction: 'left' | 'right' = 'left';
   @Input() speed: 'fast' | 'normal' | 'slow' = 'fast';
-  @Input() pauseOnHover: boolean = true;
-  @Input() className: string = '';
+  @Input() pauseOnHover = true;
+  @Input() className = '';
 
   @ViewChild('containerRef') containerRef!: ElementRef<HTMLDivElement>;
   @ViewChild('scrollerRef') scrollerRef!: ElementRef<HTMLUListElement>;

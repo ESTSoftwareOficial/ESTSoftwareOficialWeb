@@ -18,27 +18,27 @@ export class RegisterComponent {
   readonly Eye = Eye;
   readonly EyeOff = EyeOff;
   
-  isHovered: boolean = false;
-  showPassword: boolean = false;
-  showConfirmPassword: boolean = false;
-  selectedFileName: string = '';
+  isHovered = false;
+  showPassword = false;
+  showConfirmPassword = false;
+  selectedFileName = '';
   
-  firstName: string = '';
-  secondName: string = '';
-  lastName: string = '';
-  secondLastName: string = '';
-  email: string = '';
-  password: string = '';
-  confirmPassword: string = '';
-  roleId: number = 3; 
+  firstName = '';
+  secondName = '';
+  lastName = '';
+  secondLastName = '';
+  email = '';
+  password = '';
+  confirmPassword = '';
+  roleId = 3; 
   profilePhoto: File | null = null;
   
-  isLoading: boolean = false;
+  isLoading = false;
   
-  showModal: boolean = false;
+  showModal = false;
   modalType: ModalType = 'info';
-  modalTitle: string = '';
-  modalMessage: string = '';
+  modalTitle = '';
+  modalMessage = '';
 
   constructor(
     private router: Router,

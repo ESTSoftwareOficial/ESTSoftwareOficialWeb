@@ -24,7 +24,7 @@ interface Comment {
   styleUrl: './comments-section.component.css'
 })
 export class CommentsSectionComponent implements AfterViewInit {
-  @Input() lessonId: number = 0;
+  @Input() lessonId = 0;
   @ViewChild('commentTextarea') commentTextarea!: ElementRef<HTMLTextAreaElement>;
   @ViewChild('pickerContainer') pickerContainer!: ElementRef;
   
@@ -35,12 +35,12 @@ export class CommentsSectionComponent implements AfterViewInit {
   readonly Send = Send;
   readonly X = X;
   
-  newComment: string = '';
-  replyText: string = '';
-  showEmojiPicker: boolean = false;
-  showStickerPicker: boolean = false;
-  showGifPicker: boolean = false;
-  showReplyEmojiPicker: boolean = false;
+  newComment = '';
+  replyText = '';
+  showEmojiPicker = false;
+  showStickerPicker = false;
+  showGifPicker = false;
+  showReplyEmojiPicker = false;
   replyingToComment: Comment | null = null;
   private emojiListenerAdded = false;
   private replyEmojiListenerAdded = false;

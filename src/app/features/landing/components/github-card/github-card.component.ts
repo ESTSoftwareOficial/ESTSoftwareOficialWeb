@@ -9,6 +9,6 @@ import { Input } from '@angular/core';
   styleUrl: './github-card.component.scss'
 })
 export class GithubCardComponent {
-  @Input() user : string = '';
-  @Input() repoName : string = '';
+  @Input() user  = '';
+  @Input() repoName  = '';
 }

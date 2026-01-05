@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './profile.component.css'
 })
 export class ProfileComponent {
-    email: string = 'ameth.toledo@example.com';
+    email = 'ameth.toledo@example.com';
     activeTab: 'cursos' | 'certificados' = 'cursos';
 
     selectTab(tab: 'cursos' | 'certificados') {

@@ -21,7 +21,7 @@ export interface Module {
 })
 export class ModuleTimelineComponent {
   @Input() modules: Module[] = [];
-  @Input() courseName: string = '';
+  @Input() courseName = '';
 
   constructor(
     private sanitizer: DomSanitizer,

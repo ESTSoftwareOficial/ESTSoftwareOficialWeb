@@ -12,11 +12,11 @@ import type { CourseCard } from '../course-carousel/course-carousel.component';
 })
 export class CourseCardComponent {
   @Input() card!: CourseCard;
-  @Input() index: number = 0;
-  @Input() layout: boolean = false;
+  @Input() index = 0;
+  @Input() layout = false;
   @Output() cardClose = new EventEmitter<number>();
 
-  @Input() imgBannerSrc: string = '';
+  @Input() imgBannerSrc = '';
 
   constructor(private router: Router) {}
 

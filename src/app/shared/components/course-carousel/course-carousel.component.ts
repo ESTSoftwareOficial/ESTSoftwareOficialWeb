@@ -22,7 +22,7 @@ export interface CourseCard {
 })
 export class CourseCarouselComponent implements AfterViewInit, OnDestroy {
   @Input() items: CourseCard[] = [];
-  @Input() initialScroll: number = 0;
+  @Input() initialScroll = 0;
 
   @ViewChild('carouselRef') carouselRef!: ElementRef<HTMLDivElement>;
 

@@ -20,7 +20,7 @@ export class TechLanguagesGridComponent implements AfterViewInit, OnDestroy {
   @ViewChild('gridBackground') gridBackground!: ElementRef<HTMLDivElement>;
 
   private lastPosition = { x: 0, y: 0 };
-  private animationFrameId: number = 0;
+  private animationFrameId = 0;
   private observer!: IntersectionObserver;
   isVisible = false;
 
@@ -159,7 +159,7 @@ export class TechLanguagesGridComponent implements AfterViewInit, OnDestroy {
         if (!isActive) return;
 
         const currentAngle = parseFloat(element.style.getPropertyValue('--start')) || 0;
-        let targetAngle = (180 * Math.atan2(mouseY - center[1], mouseX - center[0])) / Math.PI + 90;
+        const targetAngle = (180 * Math.atan2(mouseY - center[1], mouseX - center[0])) / Math.PI + 90;
 
         const angleDiff = ((targetAngle - currentAngle + 180) % 360) - 180;
         const newAngle = currentAngle + angleDiff;

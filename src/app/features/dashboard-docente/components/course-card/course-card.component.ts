@@ -9,11 +9,11 @@ import { Router } from '@angular/router';
   styleUrl: './course-card.component.css'
 })
 export class CourseCardComponent {
-  @Input() imgSrc: string = '';
-  @Input() nameCourse: string = '';
-  @Input() tecnologyIcon: string = '';
-  @Input() teacher: string = '';
-  @Input() averageRating: string = '';
+  @Input() imgSrc = '';
+  @Input() nameCourse = '';
+  @Input() tecnologyIcon = '';
+  @Input() teacher = '';
+  @Input() averageRating = '';
 
   constructor(private router: Router) {}
 
