@@ -1,0 +1,6 @@
+{
+    "buildCommand": "cp src/environments/environment.example.ts src/environments/environment.ts && npm run build",
+    "outputDirectory": "dist/estsoftware-oficial/browser",
+    "framework": null,
+    "installCommand": "npm ci"
+}
