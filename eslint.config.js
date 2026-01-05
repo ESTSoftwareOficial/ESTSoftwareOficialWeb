@@ -19,6 +19,8 @@ module.exports = tseslint.config(
       "@typescript-eslint/no-unused-vars": "warn",
       "@angular-eslint/prefer-inject": "warn",
       "@angular-eslint/no-empty-lifecycle-method": "warn",
+      "@angular-eslint/no-output-on-prefix": "warn",
+      "@angular-eslint/use-lifecycle-interface": "warn",
       "prefer-const": "warn",
     },
   },
@@ -34,8 +36,6 @@ module.exports = tseslint.config(
       "@angular-eslint/template/label-has-associated-control": "warn",
       "@angular-eslint/template/prefer-control-flow": "warn",
       "@angular-eslint/template/no-autofocus": "warn",
-      "@angular-eslint/no-output-on-prefix": "warn",
-      "@angular-eslint/use-lifecycle-interface": "warn",
     },
   }
 );
