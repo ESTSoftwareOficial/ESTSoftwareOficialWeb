@@ -3,4 +3,4 @@
     "outputDirectory": "dist/estsoftware-oficial/browser",
     "framework": null,
     "installCommand": "npm ci"
-  }
+}
