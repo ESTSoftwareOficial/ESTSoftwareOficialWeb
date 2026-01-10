@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterOutlet, Router } from '@angular/router';
 import { SidebarComponent } from '../../components/sidebar/sidebar.component';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
 
@@ -10,4 +10,10 @@ import { NavbarComponent } from '../../components/navbar/navbar.component';
   templateUrl: './dashboard-layout.component.html',
   styleUrl: './dashboard-layout.component.css'
 })
-export class DashboardLayoutComponent {}
+export class DashboardLayoutComponent {
+  constructor(private router: Router) {}
+
+  shouldShowNavbar(): boolean {
+    return !this.router.url.includes('/lesson/');
+  }
+}
