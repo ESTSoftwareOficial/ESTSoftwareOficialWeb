@@ -1,18 +1,13 @@
 <div class="sticky top-24 bg-[#111215] rounded-xl overflow-hidden p-6 h-[calc(100vh-7rem)] flex flex-col">
   <div class="pb-4 bg-[#111215]">
-    <div class="flex items-center gap-2 mb-3">
-      <lucide-angular [img]="MessageSquare" class="w-6 h-6 text-[#22C55E]"></lucide-angular>
-      <h2 class="text-xl font-bold text-white">{{ comments.length }} Comentarios</h2>
-    </div>
-
     <div class="flex gap-2 mb-4">
       <button (click)="sortBy = 'recent'"
-        [ngClass]="sortBy === 'recent' ? 'bg-[#22C55E] text-black' : 'bg-[#1d1d1d] text-gray-400'"
+        [ngClass]="sortBy === 'recent' ? 'border-2 border-[#22C55E] text-[#22C55E] bg-transparent' : 'bg-[#1d1d1d] text-gray-400 border-2 border-transparent'"
         class="px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-300">
         Recientes
       </button>
       <button (click)="sortBy = 'popular'"
-        [ngClass]="sortBy === 'popular' ? 'bg-[#22C55E] text-black' : 'bg-[#1d1d1d] text-gray-400'"
+        [ngClass]="sortBy === 'popular' ? 'border-2 border-[#22C55E] text-[#22C55E] bg-transparent' : 'bg-[#1d1d1d] text-gray-400 border-2 border-transparent'"
         class="px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-300">
         Populares
       </button>

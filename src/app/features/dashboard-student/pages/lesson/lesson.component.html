@@ -1,7 +1,15 @@
 <div class="min-h-screen">
-  <app-navbar></app-navbar>
-  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-    
+  <app-lesson-header
+    [currentLessonNumber]="currentLesson.orderIndex"
+    [totalLessons]="48"
+    [lessonTitle]="currentLesson.title"
+    [isFirstLesson]="currentLesson.orderIndex === 1"
+    [isLastLesson]="currentLesson.orderIndex === 48"
+    (previousLesson)="previousLesson()"
+    (nextLesson)="nextLesson()">
+  </app-lesson-header>
+
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
     <div class="lg:col-span-2">
       <div class="bg-[#111215] rounded-xl overflow-hidden">
         <div class="relative w-full" style="padding-top: 56.25%;">
