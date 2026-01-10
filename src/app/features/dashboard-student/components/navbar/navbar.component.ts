@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { LucideAngularModule, Bell, Search, ChevronDown, User, CreditCard, Settings, LogOut } from 'lucide-angular';
 import { NotifyModalComponent } from '../notify-modal/notify-modal.component';
@@ -14,6 +14,9 @@ import { CourseCard } from '../../../../shared/components/expandable-cards/expan
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
+  @Input() isVisible: boolean = true;
+  email = 'ameth@example.com';
+
   readonly Bell = Bell;
   readonly Search = Search;
   readonly ChevronDown = ChevronDown;

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavbarComponent } from "../../components/navbar/navbar.component";
 import { CourseCardComponent } from "../../components/course-card/course-card.component";
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -11,10 +12,17 @@ import { CommonModule } from '@angular/common';
   styleUrl: './profile.component.css'
 })
 export class ProfileComponent {
+    constructor (private router: Router) {}
+
     email = 'ameth.toledo@example.com';
     activeTab: 'cursos' | 'certificados' = 'cursos';
 
     selectTab(tab: 'cursos' | 'certificados') {
         this.activeTab = tab;
+    }
+
+    sendToProfile(event: Event) {
+      event.preventDefault();
+      this.router.navigate(['dashboard/settings'])
     }
 }

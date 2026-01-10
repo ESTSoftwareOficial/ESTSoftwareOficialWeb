@@ -1,4 +1,4 @@
-<header class="sticky top-0 z-40 bg-black flex items-center justify-between mb-6 py-4 pb-4 border-b border-neutral-800 w-full">
+<header *ngIf="isVisible" class="sticky top-0 z-40 flex items-center justify-between mb-6 py-4 pb-4 border-b border-neutral-800 w-full" style="background-color: #0a0a0b;">
   <div class="flex-1 max-w-md">
     <form (ngSubmit)="handleSearch($event)" (click)="$event.stopPropagation()" class="search-container relative">
       <div class="relative">
@@ -13,14 +13,15 @@
           (input)="handleSearch($event)"
           name="search"
           placeholder="Buscar cursos, lecciones..." 
-          class="w-full bg-neutral-900 border border-neutral-800 text-white rounded-lg pl-12 pr-4 py-2.5 focus:outline-none focus:ring-2 focus:border-transparent transition-all placeholder:text-gray-500"
-          style="--tw-ring-color: #22C55E;"
+          class="w-full border border-neutral-800 text-white rounded-lg pl-12 pr-4 py-2.5 focus:outline-none focus:ring-2 focus:border-transparent transition-all placeholder:text-gray-500"
+          style="background-color: #1a1a1f; --tw-ring-color: #22C55E;"
         >
       </div>
 
       <div *ngIf="showSearchResults && searchResults.length > 0" 
         (click)="$event.stopPropagation()"
-        class="absolute top-full left-0 mt-2 bg-neutral-900 rounded-2xl shadow-2xl border border-neutral-800 p-4 overflow-hidden z-[9999] w-[600px]">
+        class="absolute top-full left-0 mt-2 rounded-2xl shadow-2xl border border-neutral-800 p-4 overflow-hidden z-[9999] w-[600px]"
+        style="background-color: #111215;">
         <app-expandable-cards [courses]="searchResults"></app-expandable-cards>
       </div>
     </form>
@@ -29,7 +30,10 @@
   <div class="flex items-center gap-4">
     <button 
       (click)="toggleNotifications()"
-      class="relative p-2 hover:bg-neutral-900 rounded-lg transition-colors">
+      class="relative p-2 rounded-lg transition-colors"
+      style="background-color: transparent;"
+      onmouseover="this.style.backgroundColor='#1a1a1f'"
+      onmouseout="this.style.backgroundColor='transparent'">
       <lucide-icon 
         [img]="Bell" 
         [size]="24" 
@@ -41,7 +45,10 @@
     <div class="relative">
       <button 
         (click)="toggleDropdown()"
-        class="flex items-center gap-2 hover:bg-neutral-900 rounded-lg p-1.5 transition-colors">
+        class="flex items-center gap-2 rounded-lg p-1.5 transition-colors"
+        style="background-color: transparent;"
+        onmouseover="this.style.backgroundColor='#1a1a1f'"
+        onmouseout="this.style.backgroundColor='transparent'">
         <div class="w-10 h-10 rounded-full overflow-hidden" style="background-color: #22C55E;">
           <img src="assets/ameth.png" alt="Profile" class="w-full h-full object-cover">
         </div>
@@ -55,10 +62,11 @@
 
       <div 
         *ngIf="isDropdownOpen"
-        class="absolute right-0 mt-2 w-56 bg-neutral-900 border border-neutral-800 rounded-lg shadow-lg py-2 z-50">
+        class="absolute right-0 mt-2 w-56 border border-neutral-800 rounded-lg shadow-lg py-2 z-50"
+        style="background-color: #111215;">
         <div class="px-4 py-3 border-b border-neutral-800">
           <p class="text-sm font-semibold text-white">Ameth Toledo</p>
-          <p class="text-xs text-gray-400 mt-1">ameth&#64;example.com</p>
+          <p class="text-xs text-gray-400 mt-1">{{ email }}</p>
         </div>
 
         <a 

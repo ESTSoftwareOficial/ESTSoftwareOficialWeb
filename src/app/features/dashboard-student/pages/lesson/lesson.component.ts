@@ -8,6 +8,7 @@ import { NavbarComponent } from "../../components/navbar/navbar.component";
 import { DescriptionLessonComponent } from "../../components/description-lesson/description-lesson.component";
 import { CommentsSectionComponent } from "../../components/comments-section/comments-section.component";
 import { LessonResourcesComponent } from "../../components/lesson-resources/lesson-resources.component";
+import { LessonHeaderComponent } from '../../components/lesson-header/lesson-header.component';
 
 @Pipe({
   name: 'safe',
@@ -37,7 +38,7 @@ interface Lesson {
 @Component({
   selector: 'app-lesson',
   standalone: true,
-  imports: [CommonModule, SafePipe, NavbarComponent, DescriptionLessonComponent, CommentsSectionComponent, LessonResourcesComponent],
+  imports: [CommonModule, SafePipe, NavbarComponent, DescriptionLessonComponent, CommentsSectionComponent, LessonResourcesComponent, LessonHeaderComponent],
   templateUrl: './lesson.component.html',
   styleUrl: './lesson.component.css'
 })
@@ -70,5 +71,15 @@ export class LessonComponent implements OnInit {
         this.titleService.setTitle(`${this.courseName} | ESTSoftware`);
       }
     });
+  }
+
+  nextLesson() {
+    console.log('nextLesson');
+  }
+
+  previousLesson() {
+    if (this.currentLesson.orderIndex > 1) {
+      console.log("Ir a la clase anterior");
+    }
   }
 }
