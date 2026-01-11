@@ -2,6 +2,7 @@ import { Component, Input, CUSTOM_ELEMENTS_SCHEMA, AfterViewInit, ViewChild, Ele
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { LucideAngularModule, MessageSquare, Smile, Sticker, Film, Send, X } from 'lucide-angular';
+import { Database } from 'emoji-picker-element';
 import 'emoji-picker-element';
 
 interface Comment {
@@ -42,8 +43,6 @@ export class CommentsSectionComponent implements AfterViewInit {
   showGifPicker = false;
   showReplyEmojiPicker = false;
   replyingToComment: Comment | null = null;
-  private emojiListenerAdded = false;
-  private replyEmojiListenerAdded = false;
   
   comments: Comment[] = [
     {
@@ -97,7 +96,10 @@ export class CommentsSectionComponent implements AfterViewInit {
 
   sortBy: 'recent' | 'popular' = 'recent';
 
-  constructor(private cdr: ChangeDetectorRef, private zone: NgZone) {}
+  constructor(private cdr: ChangeDetectorRef, private zone: NgZone) {
+    const db = new Database();
+    db.getEmojiByUnicodeOrName('😀'); 
+  }
 
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
@@ -107,69 +109,76 @@ export class CommentsSectionComponent implements AfterViewInit {
     }
   }
 
-  ngAfterViewInit() {}
+  ngAfterViewInit() {
+    const pickers = document.querySelectorAll('emoji-picker');
+    pickers.forEach((picker: any) => {
+      picker.dataSource = 'https://cdn.jsdelivr.net/npm/emoji-picker-element-data@^1/en/emojibase/data.json';
+    });
+  }
 
   setupEmojiPicker() {
-    if (this.emojiListenerAdded) return;
-    
     setTimeout(() => {
-      const picker = document.querySelector('emoji-picker.main-emoji-picker');
+      const picker = document.querySelector('emoji-picker.emoji-picker-custom');
       
       if (picker) {
-        picker.addEventListener('emoji-click', (event: any) => {
-          this.zone.run(() => {
-            const emoji = event.detail.unicode;
-            const textarea = this.commentTextarea.nativeElement;
-            const start = textarea.selectionStart || 0;
-            const end = textarea.selectionEnd || 0;
-            
-            this.newComment = this.newComment.substring(0, start) + emoji + this.newComment.substring(end);
-            
-            setTimeout(() => {
-              textarea.focus();
-              const newPos = start + emoji.length;
-              textarea.setSelectionRange(newPos, newPos);
-              this.cdr.detectChanges();
-            }, 0);
-          });
-        });
-        
-        this.emojiListenerAdded = true;
+        picker.removeEventListener('emoji-click', this.handleMainEmojiClick);
+        picker.addEventListener('emoji-click', this.handleMainEmojiClick);
       }
     }, 100);
   }
 
+  handleMainEmojiClick = (event: any) => {
+    this.zone.run(() => {
+      const emoji = event.detail.unicode;
+      const textarea = this.commentTextarea.nativeElement;
+      const start = textarea.selectionStart || 0;
+      const end = textarea.selectionEnd || 0;
+      
+      this.newComment = this.newComment.substring(0, start) + emoji + this.newComment.substring(end);
+      
+      setTimeout(() => {
+        textarea.focus();
+        const newPos = start + emoji.length;
+        textarea.setSelectionRange(newPos, newPos);
+        this.cdr.detectChanges();
+      }, 0);
+    });
+  }
+
   setupReplyEmojiPicker(commentId: number) {
-    if (this.replyEmojiListenerAdded) return;
-    
     setTimeout(() => {
       const picker = document.querySelector(`emoji-picker.reply-emoji-picker-${commentId}`);
       
       if (picker) {
-        picker.addEventListener('emoji-click', (event: any) => {
-          this.zone.run(() => {
-            const emoji = event.detail.unicode;
-            const textarea = document.querySelector(`#reply-textarea-${commentId}`) as HTMLTextAreaElement;
-            
-            if (textarea) {
-              const start = textarea.selectionStart || 0;
-              const end = textarea.selectionEnd || 0;
-              
-              this.replyText = this.replyText.substring(0, start) + emoji + this.replyText.substring(end);
-              
-              setTimeout(() => {
-                textarea.focus();
-                const newPos = start + emoji.length;
-                textarea.setSelectionRange(newPos, newPos);
-                this.cdr.detectChanges();
-              }, 0);
-            }
-          });
-        });
-        
-        this.replyEmojiListenerAdded = true;
+        picker.removeEventListener('emoji-click', this.handleReplyEmojiClick);
+        picker.addEventListener('emoji-click', this.handleReplyEmojiClick);
       }
     }, 100);
+  }
+
+  handleReplyEmojiClick = (event: any) => {
+    this.zone.run(() => {
+      const emoji = event.detail.unicode;
+      const commentId = this.replyingToComment?.id;
+      
+      if (!commentId) return;
+      
+      const textarea = document.querySelector(`#reply-textarea-${commentId}`) as HTMLTextAreaElement;
+      
+      if (textarea) {
+        const start = textarea.selectionStart || 0;
+        const end = textarea.selectionEnd || 0;
+        
+        this.replyText = this.replyText.substring(0, start) + emoji + this.replyText.substring(end);
+        
+        setTimeout(() => {
+          textarea.focus();
+          const newPos = start + emoji.length;
+          textarea.setSelectionRange(newPos, newPos);
+          this.cdr.detectChanges();
+        }, 0);
+      }
+    });
   }
 
   onCommentChange() {
@@ -195,7 +204,6 @@ export class CommentsSectionComponent implements AfterViewInit {
   startReply(comment: Comment) {
     this.replyingToComment = comment;
     this.replyText = '';
-    this.replyEmojiListenerAdded = false;
     
     setTimeout(() => {
       const textarea = document.querySelector(`#reply-textarea-${comment.id}`) as HTMLTextAreaElement;

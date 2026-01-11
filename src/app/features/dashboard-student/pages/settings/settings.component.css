@@ -17,3 +17,38 @@
 input:focus {
   outline: none;
 }
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #22C55E;
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #1ea34d;
+}
+
+.custom-scrollbar::-webkit-scrollbar-button {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+.custom-scrollbar::-webkit-scrollbar-button:start:decrement,
+.custom-scrollbar::-webkit-scrollbar-button:end:increment {
+  display: none;
+  height: 0;
+  width: 0;
+}
+
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #22C55E transparent;
+}
