@@ -134,7 +134,7 @@ export class PaymentHistoryComponent {
   }
 
   getStatusLabel(status: string): string {
-    const labels: { [key: string]: string } = {
+    const labels: Record<string, string> = {
       completed: 'Completado',
       pending: 'Pendiente',
       failed: 'Fallido'
@@ -143,7 +143,7 @@ export class PaymentHistoryComponent {
   }
 
   getStatusIcon(status: string) {
-    const icons: { [key: string]: any } = {
+    const icons: Record<string, any> = {
       completed: this.Check,
       pending: this.Clock,
       failed: this.X
